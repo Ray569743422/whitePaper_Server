@@ -4,13 +4,18 @@
 
     <div>
         <!-- searchable header -->
-        <p class="inline_item" > select a cell:</p>
-        <el-select class="inline_item" v-model='currentCell' filterable placeholder="" @change="selectCell">
+        <p class="inline_item" > select a species:</p>
+        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
+            <el-option v-for="item in Ssamples" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
         </el-select>
+
         <p class="inline_item" > search:</p>
         <el-input  class="inline_item" style='width:150px;' placeholder="Cell ID"></el-input>
         <p class="inline_item" > select a celltype:</p>
         <el-select class="inline_item" v-model='currentCellType' filterable placeholder="" @change='changeCellType'>
+          <el-option v-for="item in samples" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
         </el-select>
         <!-- searchable header end -->
 
@@ -60,7 +65,18 @@
     export default {
         data(){
             return {
-                currentCellType: null,
+                Ssamples : [ { index:1, value:"Planarian",},
+                            { index:2, value:"Zebrafish",},
+                            { index:3, value:"Salamander",},
+                            { index:4, value:"Shark",},
+                            {index:5, value:"Whale",}, ],
+                samples : [ { index:1, value:"Neoblast",},
+                            { index:2, value:"Neural",},
+                            { index:3, value:"Cathepsin+ cells",},
+                            { index:4, value:"Epidermal",},
+                            { index:5, value:"-",}, ],
+                currentCellType: "Neoblast",
+                currentSpecies: 'Planarian',
                 currentCell: null,
                 tableData: [],
                 pageSize:15,
@@ -72,8 +88,7 @@
                 this.currentCellType = item;
                 // change table data
                 var self = this;
-                self.tableData = 
-
+                self.tableData = null;
             },
             handleCurrentChange (currentpage){
                 this.currentPage = currentpage;
