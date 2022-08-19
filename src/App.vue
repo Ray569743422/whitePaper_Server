@@ -5,10 +5,7 @@
         <el-menu-item index="1">Home</el-menu-item>
         <el-menu-item index="2">Cell Cluster</el-menu-item>
         <el-menu-item index="3">Gene</el-menu-item>
-<<<<<<< HEAD
-=======
         <el-menu-item index="4">Gene in Umap2D</el-menu-item>
->>>>>>> ae30c83383f4b67f2a23225d8b4e01ab96267fc2
         <el-menu-item index="9" disabled>About Us</a></el-menu-item>
       </el-menu>
       <div class="line"></div>
@@ -19,7 +16,7 @@
     <hr>
     <footer>
       <div class="line"></div>
-      <p>Contact: guolidong@genomics.cn; liyao1@genomics.cn; wangrui</p>
+      <p>Contact: guolidong@genomics.cn; liyao1@genomics.cn; wangrui21@genomics.cn</p>
       <p>Single Cell</p>
     </footer>
   </div>
@@ -30,11 +27,7 @@
 import Home from "./Home.vue";
 import Cluster from './Cluster.vue'
 import Gene from './Gene.vue'
-<<<<<<< HEAD
-
-=======
 import Umap from './Umap.vue'
->>>>>>> ae30c83383f4b67f2a23225d8b4e01ab96267fc2
 
 export default {
   data() {
@@ -46,12 +39,8 @@ export default {
   components:{
      Home,
      Cluster,
-<<<<<<< HEAD
-     Gene
-=======
      Gene,
      Umap
->>>>>>> ae30c83383f4b67f2a23225d8b4e01ab96267fc2
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -67,13 +56,10 @@ export default {
         {
             this.selected = "Gene";
         }
-<<<<<<< HEAD
-=======
         else if ( key == "4")
         {
             this.selected = "Umap";
         }
->>>>>>> ae30c83383f4b67f2a23225d8b4e01ab96267fc2
         else if ( key == "9")
         {
             this.selected = "About Us";
