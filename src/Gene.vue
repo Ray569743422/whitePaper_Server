@@ -4,15 +4,23 @@
 
     <div>
         <!-- searchable header -->
+        <p class="inline_item" > select a species:</p>
+        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
+        </el-select>
         <p class="inline_item" > select a cell:</p>
         <el-select class="inline_item" v-model='currentGene' filterable placeholder="" @change="selectGene">
         </el-select>
         <p class="inline_item" > search:</p>
-        <el-input  class="inline_item" style='width:150px;' placeholder="Gene"></el-input>
+        <el-input  class="inline_item" style='width:150px;' placeholder="contig id"></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
-        <el-table ref="clusterTable" :show-header='true' class="table" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)">
+        <el-table ref="clusterTable" 
+        :show-header='true' class="table" 
+        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        :highlight-current-row='true'
+        stripe
+        @row-click='handleRow'>
             <el-table-column prop='Contig' label='Contig'></el-table-column>
             <el-table-column prop='Best-blast hit' label='Best-blast hit'></el-table-column>
             <el-table-column prop='Accession' label='Accession'></el-table-column>
@@ -48,6 +56,7 @@
     export default {
         data(){
             return {
+                currentSpecies:null,
                 currentGene: null,
                 tableData: [],
                 pageSize:15,
@@ -61,16 +70,16 @@
             handleCurrentChange (currentpage){
                 this.currentPage = currentpage;
             },
-            selectGene(item){
-                this.currentGene = '';
+            selectGene(){},
+            handleRow(row,event,column){
+                this.currentGene = row.Contig;
+                console.log(this.currentGene);
             }
         },
         beforeMount(){
             var self = this;
             $.getJSON(GENE_DATA_URL, function(_data){
-                console.log('xxxxxxxxx');
                 self.tableData = _data;
-                console.log(self.tableData);
             });
         },
     };

@@ -9,6 +9,9 @@
         </el-select>
         <p class="inline_item" > search:</p>
         <el-input  class="inline_item" style='width:150px;' placeholder="Cell ID"></el-input>
+        <p class="inline_item" > select a celltype:</p>
+        <el-select class="inline_item" v-model='currentCellType' filterable placeholder="" @change='changeCellType'>
+        </el-select>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -16,6 +19,8 @@
         :show-header='true' 
         @row-click='handleRow' 
         row-key='Cel_ID'
+        stripe
+        :highlight-current-row='true'
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)">
             <el-table-column prop='Cell ID' label='Cell ID'></el-table-column>
             <el-table-column prop='nUMI' label='nUMI'></el-table-column>
@@ -55,6 +60,7 @@
     export default {
         data(){
             return {
+                currentCellType: null,
                 currentCell: null,
                 tableData: [],
                 pageSize:15,
@@ -62,6 +68,13 @@
             }; // end of data return
         },
         methods: {
+            changeCellType(item){
+                this.currentCellType = item;
+                // change table data
+                var self = this;
+                self.tableData = 
+
+            },
             handleCurrentChange (currentpage){
                 this.currentPage = currentpage;
             },
@@ -74,10 +87,6 @@
             handleRow(row, event, column){
                 console.log(row.nUMI);
                 console.log(row);
-                console.log(column);
-            },
-            selectCell(item){
-                this.currentCell = '';
             }
         },
         beforeMount(){
@@ -86,7 +95,6 @@
             var self = this;
             $.getJSON(CLUSTER_DATA_URL, function(_data){
                 self.tableData = _data;
-                console.log(self.tableData);
             });
         },
     };
