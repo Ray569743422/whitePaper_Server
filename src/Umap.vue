@@ -44,6 +44,7 @@
     components: {
         VChart
     },
+    props:['G_sample', 'G_gene'],
     data(){
       return {
         // data buffering
@@ -123,15 +124,19 @@
          this.clean_gene_buffer()
          this.curr_selected_gene = item;
          this.loading_gene_data()
+         var msg = {};
+         msg.gene = item;
+         this.$emit('updataGlobal',msg)
        },
 
        selectSample(item){
-         console.log(item);
-         if(item == this.curr_selected_sample)
-             return
          this.clean_buffer();
          this.curr_selected_sample = item;
          this.loading_cell_data();
+         var msg = {};
+         msg.sample = item;
+         this.$emit('updataGlobal',msg)
+         console.log(item);
        },
        /*********************functions for user selection end  **********************/
 
@@ -283,6 +288,8 @@
        /*********************functions for echarts option end**********************/
      },
      mounted(){
+         if(this.G_sample != '' )
+             this.curr_selected_sample = this.G_sample;
          this.gene_option = this.get_gene_option();
          this.cell_option  = this.get_cell_option();
          if( this.curr_selected_sample != null )

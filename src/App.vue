@@ -11,7 +11,7 @@
       <div class="line"></div>
     </header>
     <article>
-        <component v-bind:is="selected"></component>
+        <component ref='mainMenu' :G_sample='G_samplename' :G_gene='G_genes'  @updataGlobal="updateGValues($event)" v-bind:is="selected"></component>
     </article>
     <hr>
     <footer>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-
+//
 import Home from "./Home.vue";
 import Cluster from './Cluster.vue'
 import Gene from './Gene.vue'
@@ -32,8 +32,10 @@ import Umap from './Umap.vue'
 export default {
   data() {
     return {
-      activeIndex: '1',
-      selected:"Home"
+      activeIndex : '1',
+      selected:"Home",
+      G_samplename : '',
+      G_genes : '',
     }
   },
   components:{
@@ -44,6 +46,9 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
+        console.log(key)
+        console.log(keyPath)
+        this.activeIndex = key;
         if ( key == "2" )
         {
             this.selected = "Cluster";
@@ -68,7 +73,24 @@ export default {
         {
             this.selected = "Home";
         }
-    }
+    },
+    updateGValues(prop) {
+       for (var key in prop) {
+          if( key == 'sample' )
+             this.G_samplename = prop[key];
+          else if ( key == 'gene' )
+              this.G_genes = prop[key];
+       }
+       // handle jump now 
+       for (var key in prop) {
+          if( key == 'jump' ) {
+              var jump_index = prop['jump'];
+              this.$nextTick(() => {
+                  this.handleSelect(jump_index,[jump_index]);
+              });
+          }
+       }
+    },
   },
 }
 </script>
