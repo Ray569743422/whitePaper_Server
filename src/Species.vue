@@ -1,23 +1,18 @@
 <template>
-  <div>
+  <div style="margin-top:120px;">
   <h1>Species</h1>
     <div>
     <el-row>
-        <el-col :span="4"><div class="image" /><img src="./assets/test1.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test2.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test1.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test2.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
     </el-row>
     <el-row>
-       <el-col :span="4"><div class="image" /><img src="./assets/test1.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;
- border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test2.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="4"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test1.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test2.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
     </el-row>
     <el-select  v-model="curr_selected_sample" filterable placeholder="" @change="selectSample" >
         <el-option v-for="item in samples" :key="item.value"
