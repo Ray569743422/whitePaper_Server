@@ -8,6 +8,7 @@
         <el-menu-item index="4">Gene in Umap2D</el-menu-item>
         <el-menu-item index="5">Gene Heatmap</el-menu-item>
         <el-menu-item index="6">Tab</el-menu-item>
+        <el-menu-item index="7">Past Papers</el-menu-item>
         <el-menu-item index="9" disabled>About Us</a></el-menu-item>
       </el-menu>
     </header>
@@ -30,6 +31,7 @@ import Cluster from './Cluster.vue'
 import Gene from './Gene.vue'
 import Heatmap from './Heatmap.vue'
 import Umap from './Umap.vue'
+import JournalArticle from './JournalArticle.vue'
 import Tab from './Tab.vue'
 
 export default {
@@ -47,6 +49,7 @@ export default {
      Gene,
      Umap,
      Heatmap,
+     JournalArticle,
      Tab
   },
   methods: {
@@ -73,6 +76,10 @@ export default {
         else if ( key == "5")
         {
             this.selected = "Heatmap";
+        }
+        else if ( key == "7")
+        {
+            this.selected = "JournalArticle";
         }
         else if ( key == "6")
         {
