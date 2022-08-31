@@ -7,11 +7,8 @@
         <el-menu-item index="3">Gene</el-menu-item>
         <el-menu-item index="4">Gene in Umap2D</el-menu-item>
         <el-menu-item index="5">Gene Heatmap</el-menu-item>
-<<<<<<< HEAD
-        <el-menu-item index="6">Past Papers</el-menu-item>
-=======
         <el-menu-item index="6">Tab</el-menu-item>
->>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
+        <el-menu-item index="7">Past Papers</el-menu-item>
         <el-menu-item index="9" disabled>About Us</a></el-menu-item>
       </el-menu>
     </header>
@@ -34,11 +31,8 @@ import Cluster from './Cluster.vue'
 import Gene from './Gene.vue'
 import Heatmap from './Heatmap.vue'
 import Umap from './Umap.vue'
-<<<<<<< HEAD
 import JournalArticle from './JournalArticle.vue'
-=======
 import Tab from './Tab.vue'
->>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
 
 export default {
   data() {
@@ -55,11 +49,8 @@ export default {
      Gene,
      Umap,
      Heatmap,
-<<<<<<< HEAD
-     JournalArticle
-=======
+     JournalArticle,
      Tab
->>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -86,13 +77,13 @@ export default {
         {
             this.selected = "Heatmap";
         }
+        else if ( key == "7")
+        {
+            this.selected = "JournalArticle";
+        }
         else if ( key == "6")
         {
-<<<<<<< HEAD
-            this.selected = "JournalArticle";
-=======
             this.selected = "Tab";
->>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
         }
         else if ( key == "9")
         {
