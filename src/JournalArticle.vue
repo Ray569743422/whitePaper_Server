@@ -22,15 +22,14 @@
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
         stripe
-        @row-click='handleRow'>
-            <el-table-column prop='物种' label='物种'></el-table-column>
-            <el-table-column prop='器官' label='器官'></el-table-column>
-            <el-table-column prop='发育时期' label='发育时期'></el-table-column>
-            <el-table-column prop='细胞数' label='细胞数'></el-table-column>
-            <el-table-column prop='参考文献' label='参考文献'></el-table-column>
-            <el-table-column prop='可视化网站' label='可视化网站'></el-table-column>
-            <el-table-column prop='备注' label='备注'></el-table-column>
-            <el-table-column prop='RDS路径' label='RDS路径'></el-table-column>
+        @row-click='handleRow'
+        @row-dblclick='updateOrganAndJump'>
+            <el-table-column prop='Load date' label='Load Date'></el-table-column>
+            <el-table-column prop='Phylum ' label='Phylum'></el-table-column>
+            <el-table-column prop='Species' label='Species'></el-table-column>
+            <el-table-column prop='Article' label='Article'></el-table-column>
+            <el-table-column prop='Organ' label='Organ'></el-table-column>
+            <el-table-column prop='number of cells' label='Number of Cells'></el-table-column>
         </el-table>
         <el-pagination layout="total,sizes, prev, jumper, next"
         :total="this.tableData.length"
@@ -49,10 +48,11 @@
     import $ from 'jquery';
 
     // datasets
-    var GENE_DATA_URL = "http://49.235.68.146/gene_data/download.json"
+    var GENE_DATA_URL = "http://49.235.68.146/gene_data/pulication.json"
 
 
     export default {
+        props:['G_sample', 'G_gene'],
         data(){
             return {
                 // data examples :
@@ -62,8 +62,16 @@
                             { index:4, value:"Shark",},
                             { index:5, value:"Whale",}, ],
                 Organs : [{index:1, value:"All"},
-                         {index:2, value:"全部"},
-                         {index:3, value:"脑"},],
+                         {index:2, value:"Whole organism"},
+                         {index:3, value:"Brain"},
+                         {index:4, value:"Tentacle and polyp"},
+                            {index:5, value:"Neuron"},
+                            {index:6, value:"Hindbrain"},
+                            {index:7, value:"Hypothalamus"},
+                            {index:8, value:"Intestine"},
+                            {index:9, value:"Tail"},
+                            {index:10, value:"Ovary"},
+                ],
                 currentSpecies:'Planarian',
                 aucCutoff: 0,
                 currentGene: null,
@@ -85,23 +93,13 @@
                 var new_tableData = [];
                 var arrayLength = this.allTableData.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    if (this.allTableData[i]['器官'] == this.currentOrgan){
+                    if (this.allTableData[i]['Organ'] == this.currentOrgan){
                         new_tableData.push(this.allTableData[i]);
                     }
                 }
                 this.tableData = new_tableData;
             },
-            selectSample(item){
-                console.log(item);
-                if(item == this.currentSpecies)
-                    return
-                this.currentSpecies = item;
-                //this.tableData = getSpeciesData(this.currentSpecies);
-            },
-            searchGene(item){
-                console.log(currentGene);
-                console.log(item);            
-            },
+            
             handleSizeChange (size) {
                 this.pageSize = size;
             },
@@ -109,8 +107,13 @@
                 this.currentPage = currentpage;
             },
             handleRow(row,event,column){
-                this.currentGene = row.物种;
-                console.log(this.currentGene);
+                this.currentSpecies = row.Species;
+                console.log(this.currentSpecies);
+                console.log(event);
+            },
+            updateOrganAndJump(row){
+                this.currentSpecies = row.Species;
+                this.$emit('updataGlobal',row.Species);
             }
         },
         beforeMount(){
@@ -120,6 +123,15 @@
                 self.allTableData = _data;
             });
         },
+        mounted(){
+             if(this.G_sample != '' )
+                 this.currentSpecies = this.G_sample;
+             else
+                 this.currentSpecies = 'Planarian';
+             console.log('--------------');
+             console.log(this.G_sample);
+             console.log('--------------');
+         },
     };
 </script>
 
