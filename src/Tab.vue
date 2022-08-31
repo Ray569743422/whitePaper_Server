@@ -20,7 +20,6 @@
     import JournalArticle from './JournalArticle.vue'
     import cellAtles from './cellAtles.vue'
     import DataBrowser from './DataBrowser.vue'
-    import Publication from './JournalArticle.vue'
 
 export default {
     data(){
@@ -35,7 +34,6 @@ export default {
       JournalArticle,
       cellAtles,
       DataBrowser,
-      Publication,
     },
     methods: {
         updateGValues(prop) {
@@ -78,4 +76,8 @@ export default {
     .el-tabs--left .el-tabs__content {
         height: 100%;
     }
+header{
+    z-index: 999;
+    }
+
 </style>
