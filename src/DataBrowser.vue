@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top:120px;">
       <div style="margin-left:0%;background-color: rgb(238, 241, 246); border: 3px solid #eee;" >
           <!-- select gene start -->
           <p class="inline_item" > Switch Atlas:</p>
