@@ -5,7 +5,7 @@
     <div>
         <!-- searchable header -->
         <p class="inline_item" > Species:</p>
-        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
+        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="species">
           <el-option v-for="item in Ssamples" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -26,6 +26,7 @@
         :show-header='true' class="table" 
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
+        :header-cell-style="{color:'#ebecf0',background:'#072aa8'}"
         stripe
         @row-click='handleRow'>
             <el-table-column prop='Contig' label='Contig'></el-table-column>

@@ -16,7 +16,8 @@
         </el-select>
         
         <p class="inline_item" > Search a paper:</p>
-        <el-input  class="inline_item" style='width:150px;' placeholder="" ></el-input>
+        <el-input  v-model='inputPaper' @change='searchPaper' class="inline_item" style='width:150px;' placeholder="" ></el-input>
+        <!--  <div v-for='item in searchPaperVague' :key='item.name'><i :class='item.name'></i><span style='z-index=999'> {{item.name}} </span></div> -->
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -25,6 +26,7 @@
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
         stripe
+        :header-cell-style="{color:'#ebecf0',fontSize:'16px',background:'#072aa8'}"
         @row-click='handleRow'
         @row-dblclick='updateOrganAndJump'>
             <el-table-column prop='Load date' label='Load Date'></el-table-column>
@@ -55,6 +57,7 @@
 
     //
     var species = require('./conf/species.js');
+    var papers = require('./conf/papers.js');
 
     export default {
         props:['G_sample', 'G_gene'],
@@ -73,9 +76,10 @@
                         {index:9, value:"Tail"},
                         {index:10, value:"Ovary"},
                 ],
+                paperResults: papers,
                 currentSpecies:null,
                 aucCutoff: 0,
-                currentGene: null,
+                inputPaper: null,
                 currentOrgan: null,
                 tableData: [],
                 allTableData: [],
@@ -84,6 +88,18 @@
             }; // end of data return
         },
         methods: {
+            searchPaper(){
+                console.log(this.inputPaper);
+                // change table data
+                var new_tableData = [];
+                var arrayLength = this.allTableData.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (this.allTableData[i]['Article'].includes(this.inputPaper)){
+                        new_tableData.push(this.allTableData[i]);
+                    }
+                }
+                this.tableData = new_tableData;
+            },
             selectSpecies(item){
                 console.log('xxx: selectSpecies');
                 console.log(item);
@@ -156,12 +172,24 @@
              console.log(this.G_sample);
              console.log('--------------');
                 console.log(this.currentSpecies);
-             //.................................
+             console.log(this.paperResults);
+                //.................................
              if (this.currentSpecies != null){
                  console.log('xxxx');
                 this.selectSpecies(this.currentSpecies);
              }
          },
+        computed:{
+            searchPaperVague(){
+                //if (!this.inputPaper){
+                //    return this.paperResults
+                //}
+                return this.paperResults.filter(item => {
+                    return item.name.includes(this.inputPaper)
+                })
+                return data
+            }
+        },
     };
 </script>
 
