@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin: 0px;">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin: 0px;background:rgba(0,0,0,0);position=:relative;top:85px;font-size:30px;" text-color="#ffffff">
         <el-menu-item index="1">Home</el-menu-item>
         <el-menu-item index="2">Cell Cluster</el-menu-item>
         <el-menu-item index="3">Gene</el-menu-item>
         <el-menu-item index="4">Gene in Umap2D</el-menu-item>
         <el-menu-item index="5">Gene Heatmap</el-menu-item>
+<<<<<<< HEAD
         <el-menu-item index="6">Past Papers</el-menu-item>
+=======
+        <el-menu-item index="6">Tab</el-menu-item>
+>>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
         <el-menu-item index="9" disabled>About Us</a></el-menu-item>
       </el-menu>
-      <div class="line"></div>
     </header>
     <article>
         <component ref='mainMenu' :G_sample='G_samplename' :G_gene='G_genes'  @updataGlobal="updateGValues($event)" v-bind:is="selected"></component>
@@ -31,7 +34,11 @@ import Cluster from './Cluster.vue'
 import Gene from './Gene.vue'
 import Heatmap from './Heatmap.vue'
 import Umap from './Umap.vue'
+<<<<<<< HEAD
 import JournalArticle from './JournalArticle.vue'
+=======
+import Tab from './Tab.vue'
+>>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
 
 export default {
   data() {
@@ -48,7 +55,11 @@ export default {
      Gene,
      Umap,
      Heatmap,
+<<<<<<< HEAD
      JournalArticle
+=======
+     Tab
+>>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -77,7 +88,11 @@ export default {
         }
         else if ( key == "6")
         {
+<<<<<<< HEAD
             this.selected = "JournalArticle";
+=======
+            this.selected = "Tab";
+>>>>>>> bf95295d2e9a3f933c2d456bf5a4c4e9424902e6
         }
         else if ( key == "9")
         {
@@ -111,14 +126,16 @@ export default {
 
 <style>
 #app {
-  font-family: Helvetica, sans-serif;
-  text-align: center;
-  margin-top: -8px;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    margin-top: -8px;
 }
 header{
     position: sticky;
     z-index: 999;
     top: 0;
     margin-bottom: 8px;
+    background-image:url("assets/sea.jpg");
+    height:145px;
     }
 </style>
