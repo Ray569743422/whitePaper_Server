@@ -10,40 +10,45 @@
           </el-menu>
     </div>
       <div>
-          <component ref='mainMenu' v-bind:is="selected"></component>
+          <component  :G_sample='G_samplename'  @updataGlobal="updateGValues($event)" v-bind:is="selected"></component>
       </div>
   </div>
 </template>
 
 <script>
     import Species from './Species.vue'
-    import Publication from './Publication.vue'
     import cellAtles from './cellAtles.vue'
     import DataBrowser from './DataBrowser.vue'
+    import Publication from './JournalArticle.vue'
 
 export default {
     data(){
         return {
             activeIndex:'0',
             selected:'Species',
+            G_samplename:'',
         }
     },
     components: {
       Species,
-      Publication,
       cellAtles,
       DataBrowser,
+      Publication,
     },
     methods: {
+           updateGValues(prop) {
+               console.log('++++++++');
+               console.log(prop);
+               console.log('========');
+               this.G_samplename = prop;
+               console.log(this.G_samplename);
+               this.$nextTick(() => {
+                   this.handleSelect("3",["3"]);
+               });
+           },
         "handleSelect"(key, keyPath){
             this.activeName = key;
-<<<<<<< HEAD
-            console.log(this.activeName);
-            console.log(key);
-            if(key=="Species"){
-=======
             if(key=='0'){
->>>>>>> f3230fa5275a28396fd220ec544a5085b920c7de
                 this.selected = "Species";
             }
             else if(key=='1')
