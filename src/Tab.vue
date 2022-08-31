@@ -8,10 +8,9 @@
             <el-menu-item index=2 >Cell atles</el-menu-item>
             <el-menu-item index=3 >Data browser</el-menu-item>
           </el-menu>
-        </el-tabs>
     </div>
       <div>
-          <component ref='mainMenu' v-bind:is="selected"></component>
+          <component  :G_sample='G_samplename'  @updataGlobal="updateGValues($event)" v-bind:is="selected"></component>
       </div>
   </div>
 </template>
@@ -21,12 +20,14 @@
     import JournalArticle from './JournalArticle.vue'
     import cellAtles from './cellAtles.vue'
     import DataBrowser from './DataBrowser.vue'
+    import Publication from './JournalArticle.vue'
 
 export default {
     data(){
         return {
             activeIndex:'0',
             selected:'Species',
+            G_samplename:'',
         }
     },
     components: {
@@ -34,8 +35,19 @@ export default {
       JournalArticle,
       cellAtles,
       DataBrowser,
+      Publication,
     },
     methods: {
+           updateGValues(prop) {
+               console.log('++++++++');
+               console.log(prop);
+               console.log('========');
+               this.G_samplename = prop;
+               console.log(this.G_samplename);
+               this.$nextTick(() => {
+                   this.handleSelect("3",["3"]);
+               });
+           },
         "handleSelect"(key, keyPath){
             this.activeName = key;
             if(key=='0'){
@@ -52,7 +64,6 @@ export default {
                 this.selected = "DataBrowser"
             }
         }
-
     }
 }
 </script>

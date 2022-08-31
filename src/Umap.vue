@@ -44,7 +44,7 @@
     components: {
         VChart
     },
-    props:['G_sample', 'G_gene'],
+    props:['G_sample'],
     data(){
       return {
         // data buffering
