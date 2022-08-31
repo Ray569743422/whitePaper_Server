@@ -44,7 +44,7 @@
     components: {
         VChart
     },
-    props:['G_sample'],
+    props:['G_sample','G_gene'],
     data(){
       return {
         // data buffering
@@ -288,14 +288,14 @@
        /*********************functions for echarts option end**********************/
      },
      mounted(){
+         console.log('--------------');
+         console.log(this.G_sample);
+         console.log('--------------');
          if(this.G_sample != '' )
              this.curr_selected_sample = this.G_sample;
          else
              this.curr_selected_sample = 'Planarian';
 
-         console.log('--------------');
-         console.log(this.G_sample);
-         console.log('--------------');
          this.gene_option = this.get_gene_option();
          this.cell_option  = this.get_cell_option();
          if( this.curr_selected_sample != null )

@@ -61,7 +61,7 @@
 
 
     export default {
-        props:['G_sample', 'G_gene'],
+        props:['G_sample'], //, 'G_gene'],
         data(){
             return {
                 // data examples :
@@ -138,12 +138,12 @@
             });
         },
         mounted(){
-            if(this.G_sample != '' )
-                this.curr_selected_sample = this.G_sample;
-            this.gene_option = this.get_gene_option();
-            this.cell_option  = this.get_cell_option();
-            if( this.curr_selected_sample != null )
-                this.loading_cell_data()
+            //if(this.G_sample != '' )
+            //    this.curr_selected_sample = this.G_sample;
+            //this.gene_option = this.get_gene_option();
+            //this.cell_option  = this.get_cell_option();
+            //if( this.curr_selected_sample != null )
+            //    this.loading_cell_data()
         },
     };
 </script>
