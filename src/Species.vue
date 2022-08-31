@@ -3,16 +3,20 @@
   <h1>Species</h1>
     <div>
     <el-row>
-        <el-col :span="6"><div class="image" /><img src="./assets/test1.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="6"><div class="image" /><img src="./assets/test2.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><img src="./assets/species/01.png" style="width:250px;height:350px;" @click="jumpDataBro"></el-col>
+        <el-col :span="6"><img src="./assets/species/02.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/03.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/04.png" style="width:250px;height:350px;"></el-col>
     </el-row>
     <el-row>
-        <el-col :span="6"><div class="image" /><img src="./assets/test1.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="6"><div class="image" /><img src="./assets/test2.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
-        <el-col :span="6"><div class="image" /><img src="./assets/test3.jpg" style="width:200px;height:200px;border-style: dashed;border-radius:25px;border-color: #4682B4"></el-col>
+        <el-col :span="6"><img src="./assets/species/05.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/06.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/07.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/08.png" style="width:250px;height:350px;"></el-col>
+    </el-row>
+    <el-row>
+        <el-col :span="6"><img src="./assets/species/09.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/10.png" style="width:250px;height:350px;"></el-col>
     </el-row>
     <el-select  v-model="curr_selected_sample" filterable placeholder="" @change="selectSample" >
         <el-option v-for="item in samples" :key="item.value"
@@ -40,6 +44,10 @@ export default {
                      self.curr_selected_sample = item;
                      this.$emit('updataGlobal',self.curr_selected_sample)
                  },
+                 jumpDataBro(){
+                   this.$emit('updataGlobal', "Planarian"); 
+                    
+                 }
     }
 }
 </script>
