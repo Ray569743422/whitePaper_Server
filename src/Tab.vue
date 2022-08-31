@@ -1,11 +1,13 @@
 <template>
   <div>
     <div>
-        <el-tabs style="height: 200px" class="demo-tabs" :default-active="activeName" @tab-click="handleClick">
-            <el-tab-pane label="Species" name="Species">Species</el-tab-pane>
-            <el-tab-pane label="Publication" name="Publication">Publication</el-tab-pane>
-            <el-tab-pane label="cellAtles" name="cellAtles">Cell atles</el-tab-pane>
-        </el-tabs>
+    </header>
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin: 0px;background:rgba(0,0,0,0);position=:relative;top:85px;font-size:30px;" text-color="#000000">
+            <el-menu-item index=0 >Summary</el-menu-item>
+            <el-menu-item index=1 >Publication</el-menu-item>
+            <el-menu-item index=2 >Cell atles</el-menu-item>
+            <el-menu-item index=3 >Data browser</el-menu-item>
+          </el-menu>
     </div>
       <div>
           <component ref='mainMenu' v-bind:is="selected"></component>
@@ -17,33 +19,42 @@
     import Species from './Species.vue'
     import Publication from './Publication.vue'
     import cellAtles from './cellAtles.vue'
+    import DataBrowser from './DataBrowser.vue'
 
 export default {
     data(){
         return {
-            activeName:"Species",
-            selected:"Species",
+            activeIndex:'0',
+            selected:'Species',
         }
     },
     components: {
       Species,
       Publication,
-      cellAtles
+      cellAtles,
+      DataBrowser,
     },
     methods: {
-        handleClick(key, keyPath){
+        "handleSelect"(key, keyPath){
             this.activeName = key;
+<<<<<<< HEAD
             console.log(this.activeName);
             console.log(key);
             if(key=="Species"){
+=======
+            if(key=='0'){
+>>>>>>> f3230fa5275a28396fd220ec544a5085b920c7de
                 this.selected = "Species";
             }
-            else if(key=="Publication")
+            else if(key=='1')
             {
                 this.selected = "Publication";
             }
-            else if(key=="cellAtles"){
+            else if(key=='2'){
                 this.selected = "cellAtles"
+            }
+            else if(key=='3'){
+                this.selected = "DataBrowser"
             }
         }
     }

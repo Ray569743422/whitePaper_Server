@@ -133,10 +133,10 @@
          this.clean_buffer();
          this.curr_selected_sample = item;
          this.loading_cell_data();
-         var msg = {};
-         msg.sample = item;
-         this.$emit('updataGlobal',msg)
-         console.log(item);
+         //var msg = {};
+         //msg.sample = item;
+         //this.$emit('updataGlobal',msg)
+         //console.log(item);
        },
        /*********************functions for user selection end  **********************/
 
@@ -290,6 +290,12 @@
      mounted(){
          if(this.G_sample != '' )
              this.curr_selected_sample = this.G_sample;
+         else
+             this.curr_selected_sample = 'Planarian';
+
+         console.log('--------------');
+         console.log(this.G_sample);
+         console.log('--------------');
          this.gene_option = this.get_gene_option();
          this.cell_option  = this.get_cell_option();
          if( this.curr_selected_sample != null )

@@ -1,24 +1,19 @@
 <template>
   <div id='app'>
-    <title>Cluster Table</title>
+    <title>Past Papers</title>
 
     <div>
         <!-- searchable header -->
         <p class="inline_item" > Species:</p>
         <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
-          <el-option v-for="item in Ssamples" :key="item.value" :label="item.label" :value="item.value">
+          <el-option v-for="item in Samples" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
-        <p class="inline_item" > Celltype:</p>
-        <el-select class="inline_item" v-model='currentCellType' filterable placeholder="all cell types" @change='selectCellType'>
-          <el-option v-for="item in samples" :key="item.value" :label="item.label" :value="item.value">
+        <p class="inline_item" > Organ:</p>
+        <el-select class="inline_item" v-model='currentOrgan' filterable placeholder="organs" @change='selectOrgan'>
+          <el-option v-for="item in Organs" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
-
-        <p class="inline_item" > AUC cutoff:</p>
-        <el-input  class="inline_item" v-model='aucCutoff' @input.native="searchGene" style='width:150px;' placeholder="0" type='number' max=1, min=0></el-input>
-        <p class="inline_item" > Search Gene:</p>
-        <el-input  class="inline_item" v-model='currentGene' style='width:150px;' placeholder="contig id"></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -28,17 +23,14 @@
         :highlight-current-row='true'
         stripe
         @row-click='handleRow'>
-            <el-table-column prop='Contig' label='Contig'></el-table-column>
-            <el-table-column prop='Best-blast hit' label='Best-blast hit'></el-table-column>
-            <el-table-column prop='Accession' label='Accession'></el-table-column>
-            <el-table-column prop='e-value' label='e-value'></el-table-column>
-            <el-table-column prop='Organism' label='Organism'></el-table-column>
-            <el-table-column prop='log fold enrichment' label='log fold enrichment'></el-table-column>
-            <el-table-column prop='cluster enriched in' label='cluster enriched in'></el-table-column>
-            <el-table-column prop='Adjusted p-value' label='Adjusted p-value'></el-table-column>
-            <el-table-column prop='AUC' label='AUC'></el-table-column>
-            <el-table-column prop='Power' label='Power'></el-table-column>
-            <el-table-column prop='Associated cell  type class' label='Associated cell type class'></el-table-column>
+            <el-table-column prop='物种' label='物种'></el-table-column>
+            <el-table-column prop='器官' label='器官'></el-table-column>
+            <el-table-column prop='发育时期' label='发育时期'></el-table-column>
+            <el-table-column prop='细胞数' label='细胞数'></el-table-column>
+            <el-table-column prop='参考文献' label='参考文献'></el-table-column>
+            <el-table-column prop='可视化网站' label='可视化网站'></el-table-column>
+            <el-table-column prop='备注' label='备注'></el-table-column>
+            <el-table-column prop='RDS路径' label='RDS路径'></el-table-column>
         </el-table>
         <el-pagination layout="total,sizes, prev, jumper, next"
         :total="this.tableData.length"
@@ -57,34 +49,25 @@
     import $ from 'jquery';
 
     // datasets
-    var GENE_DATA_URL = "http://49.235.68.146/gene_data/All_Clusters.json"
+    var GENE_DATA_URL = "http://49.235.68.146/gene_data/download.json"
 
 
     export default {
-        props:['G_sample', 'G_gene'],
         data(){
             return {
                 // data examples :
-                Ssamples : [ { index:1, value:"Planarian",},
+                Samples : [ { index:1, value:"Planarian",},
                             { index:2, value:"Zebrafish",},
                             { index:3, value:"Salamander",},
                             { index:4, value:"Shark",},
                             { index:5, value:"Whale",}, ],
-                samples : [ { index:1, value:"Neoblast",},
-                            { index:2, value:"Neural",},
-                            { index:3, value:"Cathepsin+ cell",},
-                            { index:4, value:"Epidermal",},
-                            { index:5, value:"Intestine",},
-                            { index:6, value:"Muscle",},
-                            { index:7, value:"Phyarnx",},
-                            { index:8, value:"Protonephridia",},
-                            { index:9, value:"Parapharyngeal",},
-                            { index:10, value:"-",}, 
-                            { index:11, value:"All",},],
+                Organs : [{index:1, value:"All"},
+                         {index:2, value:"全部"},
+                         {index:3, value:"脑"},],
                 currentSpecies:'Planarian',
                 aucCutoff: 0,
                 currentGene: null,
-                currentCellType: null,
+                currentOrgan: null,
                 tableData: [],
                 allTableData: [],
                 pageSize:15,
@@ -92,9 +75,9 @@
             }; // end of data return
         },
         methods: {
-            selectCellType(item){
+            selectOrgan(item){
                 //this.currentCellType = item;
-                if (this.currentCellType == 'All'){
+                if (this.currentOrgan == 'All'){
                     this.tableData = this.allTableData;
                     return
                 }
@@ -102,7 +85,7 @@
                 var new_tableData = [];
                 var arrayLength = this.allTableData.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    if (this.allTableData[i]['Associated cell  type class'] == this.currentCellType){
+                    if (this.allTableData[i]['器官'] == this.currentOrgan){
                         new_tableData.push(this.allTableData[i]);
                     }
                 }
@@ -126,7 +109,7 @@
                 this.currentPage = currentpage;
             },
             handleRow(row,event,column){
-                this.currentGene = row.Contig;
+                this.currentGene = row.物种;
                 console.log(this.currentGene);
             }
         },
@@ -136,14 +119,6 @@
                 self.tableData = _data;
                 self.allTableData = _data;
             });
-        },
-        mounted(){
-            if(this.G_sample != '' )
-                this.curr_selected_sample = this.G_sample;
-            this.gene_option = this.get_gene_option();
-            this.cell_option  = this.get_cell_option();
-            if( this.curr_selected_sample != null )
-                this.loading_cell_data()
         },
     };
 </script>
