@@ -5,8 +5,8 @@
     <div>
         <!-- searchable header -->
         <p class="inline_item" > Species:</p>
-        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
-          <el-option v-for="item in Samples" :key="item.value" :label="item.label" :value="item.value">
+        <el-select class="inline_item" @change='selectSpecies' v-model='currentSpecies' placeholder='species' filterable>
+          <el-option v-for="item in Samples" :key="item.name" :label="item.label" :value="item.name">
           </el-option>
         </el-select>
         <p class="inline_item" > Organ:</p>
@@ -14,6 +14,9 @@
           <el-option v-for="item in Organs" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
+        
+        <p class="inline_item" > Search a paper:</p>
+        <el-input  class="inline_item" style='width:150px;' placeholder="" ></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -50,29 +53,27 @@
     // datasets
     var GENE_DATA_URL = "http://49.235.68.146/gene_data/pulication.json"
 
+    //
+    var species = require('./conf/species.js');
 
     export default {
         props:['G_sample', 'G_gene'],
         data(){
             return {
                 // data examples :
-                Samples : [ { index:1, value:"Planarian",},
-                            { index:2, value:"Zebrafish",},
-                            { index:3, value:"Salamander",},
-                            { index:4, value:"Shark",},
-                            { index:5, value:"Whale",}, ],
+                Samples : species,
                 Organs : [{index:1, value:"All"},
                          {index:2, value:"Whole organism"},
                          {index:3, value:"Brain"},
                          {index:4, value:"Tentacle and polyp"},
-                            {index:5, value:"Neuron"},
-                            {index:6, value:"Hindbrain"},
-                            {index:7, value:"Hypothalamus"},
-                            {index:8, value:"Intestine"},
-                            {index:9, value:"Tail"},
-                            {index:10, value:"Ovary"},
+                        {index:5, value:"Neuron"},
+                        {index:6, value:"Hindbrain"},
+                        {index:7, value:"Hypothalamus"},
+                        {index:8, value:"Intestine"},
+                        {index:9, value:"Tail"},
+                        {index:10, value:"Ovary"},
                 ],
-                currentSpecies:'Planarian',
+                currentSpecies:null,
                 aucCutoff: 0,
                 currentGene: null,
                 currentOrgan: null,
@@ -83,6 +84,25 @@
             }; // end of data return
         },
         methods: {
+            selectSpecies(item){
+                console.log('xxx: selectSpecies');
+                console.log(item);
+                this.currentSpecies == item;
+                if (this.currentSpecies == 'All'){
+                    this.tableData = this.allTableData;
+                    return
+                }
+                // change table data
+                var new_tableData = [];
+                var arrayLength = this.allTableData.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (this.allTableData[i]['Species'] == item){
+                        new_tableData.push(this.allTableData[i]);
+                    }
+                }
+                this.tableData = new_tableData;
+                
+            },
             selectOrgan(item){
                 //this.currentCellType = item;
                 if (this.currentOrgan == 'All'){
@@ -121,16 +141,26 @@
             $.getJSON(GENE_DATA_URL, function(_data){
                 self.tableData = _data;
                 self.allTableData = _data;
+                console.log('before');
+                console.log('self');
+                console.log(self.currentSpecies);
+                self.selectSpecies(self.currentSpecies);
             });
         },
         mounted(){
              if(this.G_sample != '' )
                  this.currentSpecies = this.G_sample;
              else
-                 this.currentSpecies = 'Planarian';
+                 this.currentSpecies = 'All';
              console.log('--------------');
              console.log(this.G_sample);
              console.log('--------------');
+                console.log(this.currentSpecies);
+             //.................................
+             if (this.currentSpecies != null){
+                 console.log('xxxx');
+                this.selectSpecies(this.currentSpecies);
+             }
          },
     };
 </script>
