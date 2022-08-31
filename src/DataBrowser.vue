@@ -56,10 +56,14 @@ export default {
   },
   methods: {
     selectSample(sp){
-
+        this.selected_sample = sp ; 
     },
     selectGene(prop) {
     },
+  },
+  mounted() {
+        this.selected_sample = this.G_sample;
+        console.log('DDDD');
   },
 }
 </script>
