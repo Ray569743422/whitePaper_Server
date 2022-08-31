@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin: 0px;background:rgba(0,0,0,0);position=:relative;top:85px;font-size:30px;" text-color="#ffffff">
+    <img src="./assets/BGI.png" style="width:1503px;height:140px">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin-top: -10px;background-color:#021C57;font-size:30px;" text-color="#ffffff">
         <el-menu-item index="1">Home</el-menu-item>
         <el-menu-item index="2">Cell Cluster</el-menu-item>
         <el-menu-item index="3">Gene</el-menu-item>
         <el-menu-item index="4">Gene in Umap2D</el-menu-item>
         <el-menu-item index="5">Gene Heatmap</el-menu-item>
         <el-menu-item index="6">Tab</el-menu-item>
-        <el-menu-item index="9" disabled>About Us</a></el-menu-item>
+        <el-menu-item index="9" disabled>About Us</el-menu-item>
       </el-menu>
     </header>
     <article>
@@ -54,6 +55,7 @@ export default {
         console.log(key)
         console.log(keyPath)
         this.activeIndex = key;
+        console.log(this.activeIndex)
         if ( key == "2" )
         {
             this.selected = "Cluster";
@@ -118,8 +120,5 @@ header{
     position: sticky;
     z-index: 999;
     top: 0;
-    margin-bottom: 8px;
-    background-image:url("assets/sea.jpg");
-    height:145px;
     }
 </style>

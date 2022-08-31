@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-        <el-tabs style="height: 200px" class="demo-tabs" :default-active="activeName" @select="handleClick">
-            <el-tab-pane label="Summary" name="Summary">Summary</el-tab-pane>
+        <el-tabs style="height: 200px" class="demo-tabs" :default-active="activeName" @tab-click="handleClick">
+            <el-tab-pane label="Species" name="Species">Species</el-tab-pane>
             <el-tab-pane label="Publication" name="Publication">Publication</el-tab-pane>
             <el-tab-pane label="cellAtles" name="cellAtles">Cell atles</el-tab-pane>
         </el-tabs>
@@ -21,8 +21,8 @@
 export default {
     data(){
         return {
-            activeName:"Summary",
-            selected:"Summary",
+            activeName:"Species",
+            selected:"Species",
         }
     },
     components: {
@@ -33,7 +33,9 @@ export default {
     methods: {
         handleClick(key, keyPath){
             this.activeName = key;
-            if(key=="Summary"){
+            console.log(this.activeName);
+            console.log(key);
+            if(key=="Species"){
                 this.selected = "Species";
             }
             else if(key=="Publication")
@@ -44,7 +46,6 @@ export default {
                 this.selected = "cellAtles"
             }
         }
-
     }
 }
 </script>
