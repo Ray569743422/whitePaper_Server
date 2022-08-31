@@ -32,8 +32,6 @@ export default {
     return {
       activeIndex : '1',
       selected:"Home",
-      G_samplename : '',
-      G_genes : '',
     }
   },
   components:{
