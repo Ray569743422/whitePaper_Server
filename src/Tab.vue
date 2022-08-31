@@ -38,18 +38,18 @@ export default {
       Publication,
     },
     methods: {
-           updateGValues(prop) {
-               console.log('++++++++');
-               console.log(prop);
-               console.log('========');
-               this.G_samplename = prop;
-               console.log(this.G_samplename);
-               this.$nextTick(() => {
-                   this.handleSelect("3",["3"]);
-               });
-           },
-        "handleSelect"(key, keyPath){
-            this.activeName = key;
+        updateGValues(prop) {
+            console.log('++++++++');
+            console.log(prop);
+            console.log('========');
+            this.G_samplename = prop;
+            console.log(this.G_samplename);
+            this.$nextTick(() => {
+                this.handleSelect("3",["3"]);
+            });
+        },
+        handleSelect(key, keyPath){
+            this.activeIndex= key;
             if(key=='0'){
                 this.selected = "Species";
             }

@@ -61,8 +61,9 @@ export default {
     selectGene(prop) {
     },
   },
-  mounted() {
+  created() {
         this.selected_sample = this.G_sample;
+        console.log(this.selected_sample);
         console.log('DDDD');
   },
 }
