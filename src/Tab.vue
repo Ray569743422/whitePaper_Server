@@ -18,7 +18,7 @@
 
 <script>
     import Species from './Species.vue'
-    import Publication from './Publication.vue'
+    import JournalArticle from './JournalArticle.vue'
     import cellAtles from './cellAtles.vue'
     import DataBrowser from './DataBrowser.vue'
 
@@ -31,7 +31,7 @@ export default {
     },
     components: {
       Species,
-      Publication,
+      JournalArticle,
       cellAtles,
       DataBrowser,
     },
@@ -43,7 +43,7 @@ export default {
             }
             else if(key=='1')
             {
-                this.selected = "Publication";
+                this.selected = "JournalArticle";
             }
             else if(key=='2'){
                 this.selected = "cellAtles"
