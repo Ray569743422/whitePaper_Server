@@ -6,7 +6,7 @@
         <!-- searchable header -->
         <p class="inline_item" > Species:</p>
         <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="species">
-          <el-option v-for="item in Ssamples" :key="item.value" :label="item.label" :value="item.value">
+          <el-option v-for="item in Ssamples" :key="item.name" :label="item.label" :value="item.name">
           </el-option>
         </el-select>
         <p class="inline_item" > Celltype:</p>
@@ -15,10 +15,8 @@
           </el-option>
         </el-select>
 
-        <p class="inline_item" > AUC cutoff:</p>
-        <el-input  class="inline_item" v-model='aucCutoff' @input.native="searchGene" style='width:150px;' placeholder="0" type='number' max=1, min=0></el-input>
         <p class="inline_item" > Search Gene:</p>
-        <el-input  class="inline_item" v-model='currentGene' style='width:150px;' placeholder="contig id"></el-input>
+        <el-input  class="inline_item" v-model='inputGene' style='width:150px;' placeholder=" " @change='searchGene'></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -63,6 +61,7 @@
     var species = require('./conf/species.js');
 
     export default {
+        props:['G_sample', 'G_gene'],
         data(){
             return {
                 // data examples :
@@ -81,6 +80,7 @@
                 currentSpecies:'Planarian',
                 aucCutoff: 0,
                 currentGene: null,
+                inputGene: null,
                 currentCellType: null,
                 tableData: [],
                 allTableData: [],
@@ -106,15 +106,34 @@
                 this.tableData = new_tableData;
             },
             selectSample(item){
-                console.log(item);
                 if(item == this.currentSpecies)
                     return
                 this.currentSpecies = item;
                 //this.tableData = getSpeciesData(this.currentSpecies);
+                if (this.currentSpecies == 'All'){
+                    this.tableData = this.allTableData;
+                    return
+                }
+                // change table data
+                var new_tableData = [];
+                var arrayLength = this.allTableData.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (this.allTableData[i]['Species'] == item){
+                        new_tableData.push(this.allTableData[i]);
+                    }
+                }
+                this.tableData = new_tableData;
             },
-            searchGene(item){
-                console.log(currentGene);
-                console.log(item);            
+            searchGene(){
+                // change table data
+                var new_tableData = [];
+                var arrayLength = this.allTableData.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (this.allTableData[i]['Contig'].includes(this.inputGene)){
+                        new_tableData.push(this.allTableData[i]);
+                    }
+                }
+                this.tableData = new_tableData;
             },
             handleSizeChange (size) {
                 this.pageSize = size;
@@ -132,8 +151,24 @@
             $.getJSON(GENE_DATA_URL, function(_data){
                 self.tableData = _data;
                 self.allTableData = _data;
+                self.selectSample(self.currentSpecies);
             });
-        },
+
+        },  
+        mounted(){
+             if(this.G_sample != '' )
+                 this.currentSpecies = this.G_sample;
+             else
+                 this.currentSpecies = 'All';
+             console.log('--------------');
+             console.log(this.G_sample);
+             console.log(this.G_gene);
+             //.................................
+             if (this.currentSpecies != null){
+                 console.log('xxxx');
+                this.selectSample(this.currentSpecies);
+             }
+         },
     };
 </script>
 
