@@ -45,7 +45,7 @@ export default {
                      this.$emit('updataGlobal',self.curr_selected_sample)
                  },
                  jumpDataBro(){
-                   this.$emit('updataGlobal', "Planarian"); 
+                   this.$emit('updataGlobal', "Schmidtea mediterranea"); 
                     
                  }
     }

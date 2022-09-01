@@ -1,7 +1,7 @@
 <template>
   <div id='app'>
       <div class="common-layout">
-          <el-container>
+          <el-container style="height:320px;">
               <el-aside style="background:#EEF1F6;width:350px">
                       <title>Componement</title>
                       <h5>Feature heatmap</h5>
@@ -19,8 +19,8 @@
                           </el-form-item>
                       </el-form>
               </el-aside>
-              <el-main style="width:1000px">
-                      <v-chart ref="my_gene_echarts"  :option="gene_option"/>
+              <el-main style="width:1113px;height:300px;">
+                      <v-chart ref="my_gene_echarts" :option="gene_option" style="height:260px"/>
               </el-main>
           </el-container>
       </div>
@@ -106,7 +106,8 @@
                     },
                     grid: {
                         left: '15%',
-                        height: '50%',
+                        height: '55%',
+                        width: '85%',
                         top: '10%'
                     },
                     xAxis: {
@@ -133,7 +134,10 @@
                         calculable: true,
                         orient: 'horizontal',
                         left: 'center',
-                        bottom: '15%'
+                        bottom: '0%',
+                        inRange: {
+                                color: ['#87CEEb','#021C57']
+                                }
                     },
                     series: [
                         {
