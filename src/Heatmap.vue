@@ -6,13 +6,13 @@
                       <title>Componement</title>
                       <h5>Feature heatmap</h5>
                       <el-form :model="form" label-width="120px" style="margin-right:50px">
-                          <el-form-item label="Cell Type">
+                          <el-form-item label="Species">
                               <el-select v-model="selected" placeholder="Select">
                                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
                               </el-select>
                           </el-form-item>
                           <el-form-item label="Gene Name">
-                              <el-input v-model="geneNames" :rows="4" type="textarea" placeholder="Please input"/>
+                              <el-input v-model="geneNames" :rows="6" type="textarea" placeholder="Please input"/>
                           </el-form-item>
                           <el-form-item style="margin-left:-40px">
                               <el-button type="primary" @click="onSubmit">Submit</el-button>
@@ -45,34 +45,38 @@
                 form: {},
                 test: null,
                 options: [
-                    {
-                        value: 'Planarian',
-                        label: 'Planarian',
-                    },
-                    {
-                        value: 'Zebrafish',
-                        label: 'Zebrafish',
-                    },
-                    {
-                        value: 'Salamander',
-                        label: 'Salamander',
-                    },
-                    {
-                        value: 'Shark',
-                        label: 'Shark',
-                    },
-                    {
-                        value: 'Whale',
-                        label: 'Whale',
-                    },
-                ],
+                    {value:'Amphimedon queenslandica',label:'Amphimedon queenslandica',},
+                    {value:'Astyanax mexicanus',label:'Astyanax mexicanus',},
+                    {value:'Branchiostoma floridae',label:'Branchiostoma floridae',},
+                    {value:'Ciona intestinalis',label:'Ciona intestinalis',},
+                    {value:'Ciona robusta（intestinalis Type A）',label:'Ciona robusta（intestinalis Type A）',},
+                    {value:'Ciona savignyi',label:'Ciona savignyi',},
+                    {value:'Clytia medusa',label:'Clytia medusa',},
+                    {value:'Cynoglossus semilaevis',label:'Cynoglossus semilaevis',},
+                    {value:'Danio rerio',label:'Danio rerio',},
+                    {value:'Dreissena rostriformis',label:'Dreissena rostriformis',},
+                    {value:'Hydra vulgaris',label:'Hydra vulgaris',},
+                    {value:'Lytechinus variegatus',label:'Lytechinus variegatus',},
+                    {value:'Mnemiopsis leidyi',label:'Mnemiopsis leidyi',},
+                    {value:'Nematostella vectensis',label:'Nematostella vectensis',},
+                    {value:'Octopus vulgaris',label:'Octopus vulgaris',},
+                    {value:'Schistosoma mansoni',label:'Schistosoma mansoni',},
+                    {value:'Schmidtea mediterranea',label:'Schmidtea mediterranea',},
+                    {value:'Spongilla lacustris',label:'Spongilla lacustris',},
+                    {value:'Strongylocentrotus purpuratus',label:'Strongylocentrotus purpuratus',},
+                    {value:'Stylophora pistillata',label:'Stylophora pistillata',},
+                    {value:'Trachemys scripta elegans',label:'Trachemys scripta elegans',},
+                    {value:'Trichoplax adhaerens',label:'Trichoplax adhaerens',},
+                    {value:'Xenia sp.',label:'Xenia sp.',},
+                    {value:'Xenopus laevis',label:'Xenopus laevis',},
+                    {value:'Xenopus tropicalis',label:'Xenopus tropicalis',}
+                    ],
                 selected: "",
                 // prettier-ignore
                 cellTypes: ['Parapharyngeal', 'Cathepsin+cells', 'Epidermal', 'Muscle', 'Intestine', 'Pharynx', 'Neural', 'Neoblast', 'Protonephridia']
                 ,
                 // prettier-ignore
                 geneNames: 'dd_Smed_v4_1_0_1\ndd_Smed_v4_899_0_1\ndd_Smed_v4_90_0_1\ndd_Smed_v4_920_0_1\ndd_Smed_v4_924_0_1\ndd_Smed_v4_940_0_1',
-                // prettier-ignore
                 name: {},
                 expression: {},
                 gene_option: {}

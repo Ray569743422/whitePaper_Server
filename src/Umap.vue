@@ -58,7 +58,7 @@
         curr_cell_data : null,
         curr_gene_data : null,
         // selection tags :
-        curr_selected_sample : 'Planarian',
+        curr_selected_sample : 'Schmidtea mediterranea',
         curr_selected_gene : null,
         // data examples :
         samples : species,

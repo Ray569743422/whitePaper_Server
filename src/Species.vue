@@ -3,8 +3,8 @@
   <h1>Species</h1>
     <div>
     <el-row>
-        <el-col :span="6"><img src="./assets/species/01.png" style="width:250px;height:350px;" @click="jumpDataBro"></el-col>
-        <el-col :span="6"><img src="./assets/species/02.png" style="width:250px;height:350px;"></el-col>
+        <el-col :span="6"><img src="./assets/species/01.png" style="width:250px;height:350px;" @click="jumpDataBroSc"></el-col>
+        <el-col :span="6"><img src="./assets/species/02.png" style="width:250px;height:350px;" @click="jumpDataBroDa"></el-col>
         <el-col :span="6"><img src="./assets/species/03.png" style="width:250px;height:350px;"></el-col>
         <el-col :span="6"><img src="./assets/species/04.png" style="width:250px;height:350px;"></el-col>
     </el-row>
@@ -44,10 +44,13 @@ export default {
                      self.curr_selected_sample = item;
                      this.$emit('updataGlobal',self.curr_selected_sample)
                  },
-                 jumpDataBro(){
-                   this.$emit('updataGlobal', "Schmidtea mediterranea"); 
+                 jumpDataBroSc(){
+                   this.$emit('updataGlobal', "Schmidtea mediterranea");
                     
-                 }
+                 },
+                 jumpDataBroDa(){
+                    this.$emit('updataGlobal', "Danio rerio");
+                    }
     }
 }
 </script>

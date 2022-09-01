@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-    <img src="./assets/BGI.png" style="width:1503px;height:140px">
+    <img src="./assets/BGI.png" style="width:100%;height:140px">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin-top: -10px;background-color:#021C57;font-size:30px;" text-color="#ffffff">
         <el-menu-item index="1">Home</el-menu-item>
         <el-menu-item index="2">Gene Search</el-menu-item>
@@ -70,6 +70,7 @@ export default {
     margin-top: -8px;
 }
 header{
+    width:1503px;
     position: sticky;
     z-index: 999;
     top: 0;
