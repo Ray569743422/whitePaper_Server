@@ -20,16 +20,20 @@
             </el-option>
           </el-select>
       </div>
-      <div>
-          <div class="inline_item">
-              <p>The celltype in Umap2D space:</p>
-              <v-chart ref="my_cell_echarts"  :option="cell_option" style="width:500px;height:500px;" />
-          </div>
-          <div class="inline_item">
-              <p>The gene in Umap2D space:</p>
-              <v-chart ref="my_gene_echarts"  :option="gene_option" style="width:500px;height:500px;" />
-          </div>
-      </div>
+        <el-row>
+            <el-col :span="12">
+            <div style="margin-left:30px;">
+              <p>The celltype in Umap2D space</p>
+              <v-chart ref="my_cell_echarts"  :option="cell_option" style="width:650px;height:650px;" />
+            </div>
+           </el-col>
+            <el-col :span="12">
+            <div style="margin-left:50px">
+              <p>The gene in Umap2D space</p>
+              <v-chart ref="my_gene_echarts"  :option="gene_option" style="width:650px;height:650px;" />
+            </div>
+            </el-col>
+        </el-row>
   </div>
 </template>
 
