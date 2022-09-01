@@ -16,7 +16,7 @@
         </el-select>
         
         <p class="inline_item" > Search a paper:</p>
-        <el-input  v-model='inputPaper' @change='searchPaper' class="inline_item" style='width:150px;' placeholder="" ></el-input>
+        <el-input  v-model='inputPaper' @input='searchPaper' class="inline_item" style='width:150px;' placeholder="" ></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->

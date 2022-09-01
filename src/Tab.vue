@@ -4,7 +4,7 @@
     </header>
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin: 0px;background:rgba(0,0,0,0);position:relative;top:85px;font-size:30px;" text-color="#000000">
             <el-menu-item index=0 >Summary</el-menu-item>
-            <el-menu-item index=1 >Publication</el-menu-item>
+            <el-menu-item index=1 >Past Publications</el-menu-item>
             <el-menu-item index=2 >Cell Atlas</el-menu-item>
             <el-menu-item index=3 >Data Browser</el-menu-item>
           </el-menu>
