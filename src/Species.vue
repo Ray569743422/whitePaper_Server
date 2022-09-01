@@ -18,11 +18,6 @@
         <el-col :span="6"><img src="./assets/species/09.png" style="width:250px;height:350px;"></el-col>
         <el-col :span="6"><img src="./assets/species/10.png" style="width:250px;height:350px;"></el-col>
     </el-row>
-    <el-select  v-model="curr_selected_sample" filterable placeholder="" @change="selectSample" >
-        <el-option v-for="item in samples" :key="item.name"
-        :label="item.label" :value="item.name">
-        </el-option>
-    </el-select>
     </div>
   </div>
 </template>
