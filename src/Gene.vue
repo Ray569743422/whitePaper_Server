@@ -24,7 +24,7 @@
         :show-header='true' class="table" 
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
-        :header-cell-style="{color:'#ebecf0',background:'#072aa8'}"
+        :header-cell-style="{color:'#EEF1F6',background:'#021C57'}"
         stripe
         @row-click='handleRow'>
             <el-table-column prop='Contig' label='Contig'></el-table-column>

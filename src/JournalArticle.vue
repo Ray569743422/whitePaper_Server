@@ -17,7 +17,6 @@
         
         <p class="inline_item" > Search a paper:</p>
         <el-input  v-model='inputPaper' @change='searchPaper' class="inline_item" style='width:150px;' placeholder="" ></el-input>
-        <!--  <div v-for='item in searchPaperVague' :key='item.name'><i :class='item.name'></i><span style='z-index=999'> {{item.name}} </span></div> -->
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -26,7 +25,7 @@
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
         stripe
-        :header-cell-style="{color:'#ebecf0',fontSize:'16px',background:'#072aa8'}"
+        :header-cell-style="{color:'#EEF1F6',fontSize:'16px',background:'#021C57'}"
         @row-click='handleRow'
         @row-dblclick='updateOrganAndJump'>
             <el-table-column prop='Load date' label='Load Date'></el-table-column>
