@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         jumpUmap(){
-            this.$emit('updataGlobal', "Planarian");
+            this.$emit('updataGlobal', "Schmidtea mediterranea");
         }
     }
 }

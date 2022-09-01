@@ -58,15 +58,11 @@
         curr_cell_data : null,
         curr_gene_data : null,
         // selection tags :
-        curr_selected_sample : 'Planarian',
+        //curr_selected_sample : 'Schmidtea mediterranea',
+        curr_selected_sample : null,
         curr_selected_gene : null,
         // data examples :
         samples : species,
-            // [ { index:1, value:"Planarian",},
-            //        { index:2, value:"Zebrafish",},
-            //        { index:3, value:"Salamander",},
-            //        { index:4, value:"Shark",},
-            //        { index:5, value:"Whale",}, ],
 
         genes : [   { index:1, value:"dd_Smed_v4_1000_0_1",},
                     { index:2, value:"dd_Smed_v4_13053_0_1",},
@@ -300,7 +296,7 @@
          if(this.G_sample != '' )
              this.curr_selected_sample = this.G_sample;
          else
-             this.curr_selected_sample = 'Planarian';
+             this.curr_selected_sample = 'Schmidtea mediterranea';
 
          this.gene_option = this.get_gene_option();
          this.cell_option  = this.get_cell_option();

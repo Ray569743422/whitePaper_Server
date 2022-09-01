@@ -4,14 +4,14 @@
           <!-- select gene start -->
           <p class="inline_item" > Switch Atlas:</p>
           <el-select class="inline_item" v-model="G_sample" filterable placeholder="" @change="selectSample" >
-            <el-option v-for="item in samples" :key="item.value"
-               :label="item.label" :value="item.value">
+            <el-option v-for="item in samples" :key="item.name"
+               :label="item.label" :value="item.name">
             </el-option>
           </el-select>
       </div>
       <div>
           <div>
-              <p style="background-color:#021C57;color:#ffffff;height:50px;line-height:50px;font-size:40px;margin:10px 0 10px 0">Gene in UMAP space</p>
+              <p style="background-color:#021C57;color:#ffffff;height:50px;line-height:50px;font-size:40px;margin:10px 0 10px 0">Gene in UMAP Space</p>
               <component :G_sample='selected_sample' :G_gene='G_genes' v-bind:is='useUmap'></component>
           </div>
           <div>
@@ -20,7 +20,7 @@
           </div>
       </div>
       <div>
-          <p style="background-color:#021C57;color:#ffffff;height:50px;line-height:50px;font-size:40px;margin:20px 0 10px 0">Details of all markers</p>
+          <p style="background-color:#021C57;color:#ffffff;height:50px;line-height:50px;font-size:40px;margin:20px 0 10px 0">Details of All Markers</p>
           <component :G_sample='selected_sample' :G_gene='G_genes' v-bind:is='useGene'></component>
       </div>
   </div>
@@ -32,21 +32,19 @@ import Gene from './Gene.vue'
 import Heatmap from './Heatmap.vue'
 import Umap from './Umap.vue'
 
+var species = require('./conf/species.js');
+
 export default {
   props:['G_sample'],
   data() {
     return {
-      selected_sample: 'Planrian',
+      selected_sample: 'Schmidtea mediterranea',
       G_genes : '',
       G_genesets :[],
       useUmap:'Umap',
       useHeatmap:'Heatmap',
       useGene:'Gene',
-      samples : [ { index:1, value:"Planarian",},
-                    { index:2, value:"Zebrafish",},
-                    { index:3, value:"Salamander",},
-                    { index:4, value:"Shark",},
-                    { index:5, value:"Whale",}, ],
+      samples : species, 
     }
   },
   components:{

@@ -4,9 +4,9 @@
     <img src="./assets/BGI.png" style="width:1503px;height:140px">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin-top: -10px;background-color:#021C57;font-size:30px;" text-color="#ffffff">
         <el-menu-item index="1">Home</el-menu-item>
-        <el-menu-item index="2">Gene Search</el-menu-item>
+        <el-menu-item index="2">Search Gene</el-menu-item>
         <el-menu-item index="3">Browse Experiments</el-menu-item>
-        <el-menu-item index="4">About US</el-menu-item>
+        <el-menu-item index="4">About Us</el-menu-item>
       </el-menu>
     </header>
     <article>
@@ -16,7 +16,7 @@
     <footer>
       <div class="line"></div>
       <p>Contact: guolidong@genomics.cn; liyao1@genomics.cn; wangrui21@genomics.cn</p>
-      <p>Single Cell</p>
+      <p>BGI - Aquatic Organism Cell Atlas</p>
     </footer>
   </div>
 </template>

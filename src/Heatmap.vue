@@ -8,7 +8,7 @@
                       <el-form :model="form" label-width="120px" style="margin-right:50px">
                           <el-form-item label="Cell Type">
                               <el-select v-model="selected" placeholder="Select">
-                                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
+                                  <el-option v-for="item in options" :key="item.name" :label="item.label" :value="item.name"/>
                               </el-select>
                           </el-form-item>
                           <el-form-item label="Gene Name">
@@ -33,6 +33,7 @@
     import * as echarts from 'echarts';
     import VChart from "vue-echarts";
 
+    var species = require('./conf/species.js');
     // datasets
     var EXPRESSION_DATA_URL = 'http://49.235.68.146/gene_data/heatmap/'
     export default{
@@ -44,28 +45,7 @@
             return{
                 form: {},
                 test: null,
-                options: [
-                    {
-                        value: 'Planarian',
-                        label: 'Planarian',
-                    },
-                    {
-                        value: 'Zebrafish',
-                        label: 'Zebrafish',
-                    },
-                    {
-                        value: 'Salamander',
-                        label: 'Salamander',
-                    },
-                    {
-                        value: 'Shark',
-                        label: 'Shark',
-                    },
-                    {
-                        value: 'Whale',
-                        label: 'Whale',
-                    },
-                ],
+                options: species,
                 selected: "",
                 // prettier-ignore
                 cellTypes: ['Parapharyngeal', 'Cathepsin+cells', 'Epidermal', 'Muscle', 'Intestine', 'Pharynx', 'Neural', 'Neoblast', 'Protonephridia']
