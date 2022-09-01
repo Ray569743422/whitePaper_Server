@@ -25,7 +25,7 @@
 //
 import Home from "./Home.vue";
 import Tab from './Tab.vue'
-import ComingSoon from './CommingSoon.vue'
+import ComingSoon from './ComingSoon.vue'
 
 export default {
   data() {
