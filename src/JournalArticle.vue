@@ -5,8 +5,8 @@
     <div style="margin-top:120px;">
         <!-- searchable header -->
         <p class="inline_item" > Species:</p>
-        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
-          <el-option v-for="item in Samples" :key="item.value" :label="item.label" :value="item.value">
+        <el-select class="inline_item" @change='selectSpecies' v-model='currentSpecies' placeholder='species' filterable>
+          <el-option v-for="item in Samples" :key="item.name" :label="item.label" :value="item.name">
           </el-option>
         </el-select>
         <p class="inline_item" > Organ:</p>
@@ -14,6 +14,10 @@
           <el-option v-for="item in Organs" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
+        
+        <p class="inline_item" > Search a paper:</p>
+        <el-input  v-model='inputPaper' @change='searchPaper' class="inline_item" style='width:150px;' placeholder="" ></el-input>
+        <!--  <div v-for='item in searchPaperVague' :key='item.name'><i :class='item.name'></i><span style='z-index=999'> {{item.name}} </span></div> -->
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -22,6 +26,7 @@
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
         stripe
+        :header-cell-style="{color:'#ebecf0',fontSize:'16px',background:'#072aa8'}"
         @row-click='handleRow'
         @row-dblclick='updateOrganAndJump'>
             <el-table-column prop='Load date' label='Load Date'></el-table-column>
@@ -50,31 +55,31 @@
     // datasets
     var GENE_DATA_URL = "http://49.235.68.146/gene_data/pulication.json"
 
+    //
+    var species = require('./conf/species.js');
+    var papers = require('./conf/papers.js');
 
     export default {
         props:['G_sample', 'G_gene'],
         data(){
             return {
                 // data examples :
-                Samples : [ { index:1, value:"Planarian",},
-                            { index:2, value:"Zebrafish",},
-                            { index:3, value:"Salamander",},
-                            { index:4, value:"Shark",},
-                            { index:5, value:"Whale",}, ],
+                Samples : species,
                 Organs : [{index:1, value:"All"},
                          {index:2, value:"Whole organism"},
                          {index:3, value:"Brain"},
                          {index:4, value:"Tentacle and polyp"},
-                            {index:5, value:"Neuron"},
-                            {index:6, value:"Hindbrain"},
-                            {index:7, value:"Hypothalamus"},
-                            {index:8, value:"Intestine"},
-                            {index:9, value:"Tail"},
-                            {index:10, value:"Ovary"},
+                        {index:5, value:"Neuron"},
+                        {index:6, value:"Hindbrain"},
+                        {index:7, value:"Hypothalamus"},
+                        {index:8, value:"Intestine"},
+                        {index:9, value:"Tail"},
+                        {index:10, value:"Ovary"},
                 ],
-                currentSpecies:'Planarian',
+                paperResults: papers,
+                currentSpecies:null,
                 aucCutoff: 0,
-                currentGene: null,
+                inputPaper: null,
                 currentOrgan: null,
                 tableData: [],
                 allTableData: [],
@@ -83,6 +88,37 @@
             }; // end of data return
         },
         methods: {
+            searchPaper(){
+                console.log(this.inputPaper);
+                // change table data
+                var new_tableData = [];
+                var arrayLength = this.allTableData.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (this.allTableData[i]['Article'].includes(this.inputPaper)){
+                        new_tableData.push(this.allTableData[i]);
+                    }
+                }
+                this.tableData = new_tableData;
+            },
+            selectSpecies(item){
+                console.log('xxx: selectSpecies');
+                console.log(item);
+                this.currentSpecies == item;
+                if (this.currentSpecies == 'All'){
+                    this.tableData = this.allTableData;
+                    return
+                }
+                // change table data
+                var new_tableData = [];
+                var arrayLength = this.allTableData.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (this.allTableData[i]['Species'] == item){
+                        new_tableData.push(this.allTableData[i]);
+                    }
+                }
+                this.tableData = new_tableData;
+                
+            },
             selectOrgan(item){
                 //this.currentCellType = item;
                 if (this.currentOrgan == 'All'){
@@ -121,17 +157,39 @@
             $.getJSON(GENE_DATA_URL, function(_data){
                 self.tableData = _data;
                 self.allTableData = _data;
+                console.log('before');
+                console.log('self');
+                console.log(self.currentSpecies);
+                self.selectSpecies(self.currentSpecies);
             });
         },
         mounted(){
              if(this.G_sample != '' )
                  this.currentSpecies = this.G_sample;
              else
-                 this.currentSpecies = 'Planarian';
+                 this.currentSpecies = 'All';
              console.log('--------------');
              console.log(this.G_sample);
              console.log('--------------');
+                console.log(this.currentSpecies);
+             console.log(this.paperResults);
+                //.................................
+             if (this.currentSpecies != null){
+                 console.log('xxxx');
+                this.selectSpecies(this.currentSpecies);
+             }
          },
+        computed:{
+            searchPaperVague(){
+                //if (!this.inputPaper){
+                //    return this.paperResults
+                //}
+                return this.paperResults.filter(item => {
+                    return item.name.includes(this.inputPaper)
+                })
+                return data
+            }
+        },
     };
 </script>
 

@@ -5,7 +5,7 @@
     <div>
         <!-- searchable header -->
         <p class="inline_item" > Species:</p>
-        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="">
+        <el-select class="inline_item" v-model='currentSpecies' filterable placeholder="species">
           <el-option v-for="item in Ssamples" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -26,6 +26,7 @@
         :show-header='true' class="table" 
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
+        :header-cell-style="{color:'#ebecf0',background:'#072aa8'}"
         stripe
         @row-click='handleRow'>
             <el-table-column prop='Contig' label='Contig'></el-table-column>
@@ -59,16 +60,13 @@
     // datasets
     var GENE_DATA_URL = "http://49.235.68.146/gene_data/All_Clusters.json"
 
+    var species = require('./conf/species.js');
 
     export default {
         data(){
             return {
                 // data examples :
-                Ssamples : [ { index:1, value:"Planarian",},
-                            { index:2, value:"Zebrafish",},
-                            { index:3, value:"Salamander",},
-                            { index:4, value:"Shark",},
-                            { index:5, value:"Whale",}, ],
+                Ssamples : species,
                 samples : [ { index:1, value:"Neoblast",},
                             { index:2, value:"Neural",},
                             { index:3, value:"Cathepsin+ cell",},

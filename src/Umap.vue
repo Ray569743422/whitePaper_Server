@@ -4,8 +4,8 @@
           <!-- select gene start -->
           <p class="inline_item" > Please select one species:</p>
           <el-select class="inline_item" v-model="curr_selected_sample" filterable placeholder="" @change="selectSample" >
-            <el-option v-for="item in samples" :key="item.value"
-               :label="item.label" :value="item.value">
+            <el-option v-for="item in samples" :key="item.name"
+               :label="item.name" :value="item.name">
             </el-option>
           </el-select>
           <!-- select gene start -->
@@ -39,6 +39,7 @@
   import VChart from "vue-echarts";
   var CT_URL='http://49.235.68.146/cluster_data/Planarian.CellType.json';
   var GENE_URL='http://49.235.68.146/gene_data/single_gene/'
+  var species = require('./conf/species.js');
   export default {
     name : "Umap2D",
     components: {
@@ -56,11 +57,12 @@
         curr_selected_sample : 'Planarian',
         curr_selected_gene : null,
         // data examples :
-        samples : [ { index:1, value:"Planarian",},
-                    { index:2, value:"Zebrafish",},
-                    { index:3, value:"Salamander",},
-                    { index:4, value:"Shark",},
-                    { index:5, value:"Whale",}, ],
+        samples : species,
+            // [ { index:1, value:"Planarian",},
+            //        { index:2, value:"Zebrafish",},
+            //        { index:3, value:"Salamander",},
+            //        { index:4, value:"Shark",},
+            //        { index:5, value:"Whale",}, ],
 
         genes : [   { index:1, value:"dd_Smed_v4_1000_0_1",},
                     { index:2, value:"dd_Smed_v4_13053_0_1",},
