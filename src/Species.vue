@@ -19,8 +19,8 @@
         <el-col :span="6"><img src="./assets/species/10.png" style="width:250px;height:350px;"></el-col>
     </el-row>
     <el-select  v-model="curr_selected_sample" filterable placeholder="" @change="selectSample" >
-        <el-option v-for="item in samples" :key="item.value"
-        :label="item.label" :value="item.value">
+        <el-option v-for="item in samples" :key="item.name"
+        :label="item.label" :value="item.name">
         </el-option>
     </el-select>
     </div>
@@ -28,15 +28,15 @@
 </template>
 
 <script>
+
+//
+    var species = require('./conf/species.js');
+
 export default {
     data(){
         return {
             curr_selected_sample:'',
-            samples : [ { index:1, value:"Planarian",},
-                    { index:2, value:"Zebrafish",},
-                    { index:3, value:"Salamander",},
-                    { index:4, value:"Shark",},
-                    { index:5, value:"Whale",}, ],
+            samples : species,
         }
     },
     methods: {

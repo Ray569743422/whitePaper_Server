@@ -87,10 +87,10 @@ export default {
     methods: {
         jumpUmapsc(){
             this.$emit('updataGlobal', "Schmidtea mediterranea");
-        },
+            },
         jumpUmapda(){
-            this.$emit('updataGlobal', "Danio rerio");
-        }
+            this.$emit('updataGlobal', "Daino rerio");
+            }
     }
 }
 </script>

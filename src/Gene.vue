@@ -16,7 +16,7 @@
         </el-select>
 
         <p class="inline_item" > Search Gene:</p>
-        <el-input  class="inline_item" v-model='inputGene' style='width:150px;' placeholder=" " @change='searchGene'></el-input>
+        <el-input  class="inline_item" v-model='inputGene' style='width:150px;' placeholder="contig id" @change='searchGene'></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
@@ -24,7 +24,7 @@
         :show-header='true' class="table" 
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         :highlight-current-row='true'
-        :header-cell-style="{color:'#ebecf0',background:'#072aa8'}"
+        :header-cell-style="{color:'#EEF1F6',background:'#021C57'}"
         stripe
         @row-click='handleRow'>
             <el-table-column prop='Contig' label='Contig'></el-table-column>
