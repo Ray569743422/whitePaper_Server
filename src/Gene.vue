@@ -16,7 +16,7 @@
         </el-select>
 
         <p class="inline_item" > Search Gene:</p>
-        <el-input  class="inline_item" v-model='inputGene' style='width:150px;' placeholder=" " @change='searchGene'></el-input>
+        <el-input  class="inline_item" v-model='inputGene' style='width:150px;' placeholder="contig id" @change='searchGene'></el-input>
         <!-- searchable header end -->
 
         <!-- cluster table content -->
