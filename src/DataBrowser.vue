@@ -10,17 +10,17 @@
           </el-select>
       </div>
       <div>
-          <div class="inline_item">
-              <p>Gene in UMAP space:</p>
+          <div>
+              <p style="background-color:#021C57;color:#ffffff;height:40px;line-height: 40px">Gene in UMAP space:</p>
               <component :G_sample='selected_sample' :G_gene='G_genes' v-bind:is='useUmap'></component>
           </div>
-          <div class="inline_item">
-              <p>Heatmap of Geneset:</p>
+          <div>
+              <p style="background-color:#021C57;color:#ffffff;height:40px;line-height: 40px">Heatmap of Geneset:</p>
               <component :G_sample='selected_sample' :G_gene='G_genes' v-bind:is='useHeatmap'></component>
           </div>
       </div>
       <div>
-          <p>Details of all markers:</p>
+          <p style="background-color:#021C57;color:#ffffff;height:40px;line-height: 40px">Details of all markers:</p>
           <component :G_sample='selected_sample' :G_gene='G_genes' v-bind:is='useGene'></component>
       </div>
   </div>

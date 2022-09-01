@@ -1,26 +1,28 @@
 <template>
   <div id='app'>
-      <div style="display:flex">
-        <div class="selectComponent">
-          <title>Componement</title>
-            <h5>Feature heatmap</h5>
-          <el-form :model="form" label-width="120px">
-              <el-form-item label="Cell Type">
-                  <el-select v-model="selected" placeholder="Select">
-                      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
-                  </el-select>
-              </el-form-item>
-              <el-form-item label="Gene Name">
-                  <el-input v-model="geneNames" :rows="2" type="textarea" placeholder="Please input"/>
-              </el-form-item>
-              <el-form-item>
-                  <el-button type="primary" @click="onSubmit">Submit</el-button>
-              </el-form-item>
-          </el-form>
-      </div>
-        <div class="heatmap" id="main" style="height:500px;width:600px;postion:relative;" >
-          <v-chart ref="my_gene_echarts"  :option="gene_option" style="width:1000px;height:400px;" />
-      </div>
+      <div class="common-layout">
+          <el-container>
+              <el-aside style="background:#EEF1F6;width:350px">
+                      <title>Componement</title>
+                      <h5>Feature heatmap</h5>
+                      <el-form :model="form" label-width="120px" style="margin-right:50px">
+                          <el-form-item label="Cell Type">
+                              <el-select v-model="selected" placeholder="Select">
+                                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
+                              </el-select>
+                          </el-form-item>
+                          <el-form-item label="Gene Name">
+                              <el-input v-model="geneNames" :rows="4" type="textarea" placeholder="Please input"/>
+                          </el-form-item>
+                          <el-form-item style="margin-left:-40px">
+                              <el-button type="primary" @click="onSubmit">Submit</el-button>
+                          </el-form-item>
+                      </el-form>
+              </el-aside>
+              <el-main style="width:1000px">
+                      <v-chart ref="my_gene_echarts"  :option="gene_option"/>
+              </el-main>
+          </el-container>
       </div>
   </div>
 </template>
@@ -203,11 +205,6 @@
 </script>
 
 <style>
-    .inline_item {
-        display: inline-block;
-        margin-left: 20px;
-        vertical-align: middle;
-    }
     .selectComponent {
         background-color:#f5f5f5;
         width:300px;
