@@ -1,4 +1,5 @@
 module.exports = [
+    { index: 0 , name: 'All',                          },
     { index: 1 , name:'Amphimedon queenslandica',             },
     { index: 2 , name:'Astyanax mexicanus',             },
     { index: 3 , name:'Branchiostoma floridae',             },
