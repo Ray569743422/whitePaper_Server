@@ -2,7 +2,7 @@ const resolve = require('path').resolve
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('url')
-const publicPath = ''
+const publicPath = 'http://49.235.68.146:8020/code/views/WhitePaper/'
 
 module.exports = (options = {}) => ({
   entry: {
