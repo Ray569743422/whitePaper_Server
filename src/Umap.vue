@@ -41,8 +41,8 @@
   import $ from 'jquery';
   import * as echarts from 'echarts';
   import VChart from "vue-echarts";
-  var CT_URL='http://49.235.68.146/cluster_data/Planarian.CellType.json';
-  var GENE_URL='http://49.235.68.146/gene_data/single_gene/'
+  var CT_URL='http://www.bgiocean.com:8020/code/index.php/WhitePaper/celltypeUmap'
+  var GENE_URL='https://www.bgiocean.com/gene_data/single_gene/'
   var species = require('./conf/species.js');
   export default {
     name : "Umap2D",
@@ -64,12 +64,12 @@
         // data examples :
         samples : species,
 
-        genes : [   { index:1, value:"dd_Smed_v4_1000_0_1",},
-                    { index:2, value:"dd_Smed_v4_13053_0_1",},
-                    { index:3, value:"dd_Smed_v4_13056_0_1",},
-                    { index:4, value:"dd_Smed_v4_13061_0_1",},
-                    { index:5, value:"dd_Smed_v4_13086_0_1",},
-                    { index:6, value:"dd_Smed_v4_13087_0_1",},
+        genes : [   { index:1, value:"dd-Smed-v4-1000-0-1",},
+                    { index:2, value:"dd-Smed-v4-100-0-1",},
+                    { index:3, value:"dd-Smed-v4-10001-0-1",},
+                    { index:4, value:"dd-Smed-v4-10002-0-1",},
+                    { index:5, value:"dd-Smed-v4-100026-0-1",},
+                    { index:6, value:"dd-Smed-v4-10003-0-1",},
                 ],
         // echarts options
         gene_option : {backgroundColor:'#FFFFFF',},
@@ -104,15 +104,25 @@
           return;
        },
        loading_cell_data(){
-           var self = this;
-           var used_url = CT_URL;
-           console.log('start loading cell')
-           $.getJSON(used_url,function(_data) {
-             console.log('loading cell done')
-             self.curr_cell_data = _data 
-             self.cell_option = self.get_cell_option();
-             self.gene_option = self.get_gene_option();
-           });
+          var self = this;
+          let params = new URLSearchParams({
+               species: 'Schmidtea_mediterranea',
+          });
+          this.$axios.post(CT_URL, params)
+              .then(res=>{
+                      console.log(res.data);
+                      self.curr_cell_data =res.data['ret'];
+                      self.cell_option = self.get_cell_option();
+                      self.gene_option = self.get_gene_option();
+          })
+          //var used_url = CT_URL;
+          //console.log('start loading cell')
+          //$.getJSON(used_url,function(_data) {
+          //  console.log('loading cell done')
+          //  self.curr_cell_data = _data 
+          //  self.cell_option = self.get_cell_option();
+          //  self.gene_option = self.get_gene_option();
+          //});
        },
        /*********************functions for datas end**********************/
 

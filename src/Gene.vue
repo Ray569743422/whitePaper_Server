@@ -56,7 +56,7 @@
     import $ from 'jquery';
 
     // datasets
-    var GENE_DATA_URL = "http://49.235.68.146/gene_data/All_Clusters.json"
+    var GENE_DATA_URL = "https://www.bgiocean.com/gene_data/All_Clusters.json"
 
     var species = require('./conf/species.js');
 

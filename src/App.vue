@@ -7,6 +7,7 @@
         <el-menu-item index="2">Search Gene</el-menu-item>
         <el-menu-item index="3">Browse Experiments</el-menu-item>
         <el-menu-item index="4">About Us</el-menu-item>
+        <el-menu-item index="5">Test API</el-menu-item>
       </el-menu>
     </header>
     <article>
@@ -26,7 +27,7 @@
 import Home from "./Home.vue";
 import Tab from './Tab.vue'
 import ComingSoon from './ComingSoon.vue'
-
+import TestAPI from './TestAPI.vue'
 export default {
   data() {
     return {
@@ -38,6 +39,7 @@ export default {
      Home,
      Tab,
      ComingSoon,
+     TestAPI,
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -53,6 +55,10 @@ export default {
         else if ( key == "3")
         {
             this.selected = "Tab";
+        }
+        else if ( key == "5")
+        {
+            this.selected = "TestAPI";
         }
         else
         {
