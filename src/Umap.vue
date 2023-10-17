@@ -42,7 +42,7 @@
   import * as echarts from 'echarts';
   import VChart from "vue-echarts";
   var CT_URL='http://www.bgiocean.com:8020/code/index.php/WhitePaper/celltypeUmap'
-  var GENE_URL='https://www.bgiocean.com/gene_data/single_gene/'
+  var GENE_URL='http://www.bgiocean.com:8020/code/index.php/WhitePaper/expressionUmap'
   var species = require('./conf/species.js');
   export default {
     name : "Umap2D",
@@ -94,14 +94,15 @@
        },
        loading_gene_data(){
           var self = this;
-          var used_url = GENE_URL+this.curr_selected_gene+'.gene_expr.json';
-          console.log('start loading gene')
-          $.getJSON(used_url,function(_data) {
-             console.log('loading gene done')
-             self.curr_gene_data = _data 
-             self.gene_option = self.get_gene_option();
+          let params = new URLSearchParams({
+               species: 'Schmidtea_mediterranea',
+               gene : this.curr_selected_gene,
           });
-          return;
+          this.$axios.post(GENE_URL, params)
+              .then(res=>{
+                      self.curr_gene_data = res.data['ret'];
+                      self.gene_option = self.get_gene_option();
+          })
        },
        loading_cell_data(){
           var self = this;
@@ -110,19 +111,23 @@
           });
           this.$axios.post(CT_URL, params)
               .then(res=>{
-                      console.log(res.data);
-                      self.curr_cell_data =res.data['ret'];
+                      self.set_cell_data(res.data['ret']);
                       self.cell_option = self.get_cell_option();
                       self.gene_option = self.get_gene_option();
           })
-          //var used_url = CT_URL;
-          //console.log('start loading cell')
-          //$.getJSON(used_url,function(_data) {
-          //  console.log('loading cell done')
-          //  self.curr_cell_data = _data 
-          //  self.cell_option = self.get_cell_option();
-          //  self.gene_option = self.get_gene_option();
-          //});
+       },
+       set_cell_data(data){
+           this.curr_cell_data = {}
+           for(var i=0 ; i< data.length; i++){
+                var item = data[i];
+                var key = item[2];
+                if ( key in this.curr_cell_data ){
+                    this.curr_cell_data[key].push([item[0],item[1]])
+                } else {
+                    this.curr_cell_data[key] = [];
+                    this.curr_cell_data[key].push([item[0],item[1]])
+                }
+           }
        },
        /*********************functions for datas end**********************/
 
