@@ -61,6 +61,7 @@
         //curr_selected_sample : 'Schmidtea mediterranea',
         curr_selected_sample : null,
         curr_selected_gene : null,
+        curr_db_key : null,
         // data examples :
         samples : species,
 
@@ -95,7 +96,7 @@
        loading_gene_data(){
           var self = this;
           let params = new URLSearchParams({
-               species: 'Schmidtea_mediterranea',
+               species:this.curr_db_key,
                gene : this.curr_selected_gene,
           });
           this.$axios.post(GENE_URL, params)
@@ -107,7 +108,7 @@
        loading_cell_data(){
           var self = this;
           let params = new URLSearchParams({
-               species: 'Schmidtea_mediterranea',
+               species:this.curr_db_key,
           });
           this.$axios.post(CT_URL, params)
               .then(res=>{
@@ -145,15 +146,20 @@
          msg.gene = item;
          this.$emit('updataGlobal',msg)
        },
-
+       updateCurrSample(item){
+         this.curr_selected_sample = item;
+         for(var i=0 ; i< this.samples.length; i++){
+            var tt =  this.samples[i];
+            if (tt.name == item ){
+                this.curr_db_key = tt.DBKey;
+                this.genes = tt.exampleGene;
+            }
+         }
+       },
        selectSample(item){
          this.clean_buffer();
-         this.curr_selected_sample = item;
+         this.updateCurrSample(item);
          this.loading_cell_data();
-         //var msg = {};
-         //msg.sample = item;
-         //this.$emit('updataGlobal',msg)
-         //console.log(item);
        },
        /*********************functions for user selection end  **********************/
 
@@ -309,9 +315,9 @@
          console.log(this.G_sample);
          console.log('--------------');
          if(this.G_sample != '' )
-             this.curr_selected_sample = this.G_sample;
+             this.updateCurrSample(this.G_sample);
          else
-             this.curr_selected_sample = 'Schmidtea mediterranea';
+             this.updateCurrSample('Schmidtea mediterranea');
 
          this.gene_option = this.get_gene_option();
          this.cell_option  = this.get_cell_option();
