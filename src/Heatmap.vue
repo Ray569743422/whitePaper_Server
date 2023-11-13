@@ -4,11 +4,16 @@
           <el-container style="height:320px;">
               <el-aside style="background:#EEF1F6;width:350px">
                       <title>Componement</title>
-                      <h5>Feature heatmap</h5>
+                      <h5>Gene heatmap</h5>
                       <el-form :model="form" label-width="120px" style="margin-right:50px">
                           <el-form-item label="Species">
-                              <el-select v-model="selected" placeholder="Select">
-                                  <el-option v-for="item in options" :key="item.name" :label="item.label" :value="item.name"/>
+                              <el-select v-model="species" placeholder="Select">
+                                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
+                              </el-select>
+                          </el-form-item>
+                          <el-form-item label="Organ">
+                              <el-select v-model="organ" placeholder="Select">
+                                  <el-option v-for="item in organTypes" :key="item.value" :label="item.value" :value="item.value"/>
                               </el-select>
                           </el-form-item>
                           <el-form-item label="Gene Name">
@@ -28,14 +33,13 @@
 </template>
 
 <script>
-    // 导入 echart
+    // import echart
     import $ from 'jquery';
     import * as echarts from 'echarts';
     import VChart from "vue-echarts";
+    var species=require('./conf/species.js');
+    var expression_data_url = 'http://www.bgiocean.com:8020/code/index.php/WhitePaper/heatmap';
 
-    var species = require('./conf/species.js');
-    // datasets
-    var EXPRESSION_DATA_URL = 'http://49.235.68.146/gene_data/heatmap/'
     export default{
         name : "heatmap",
         components: {
@@ -44,13 +48,15 @@
         data() {
             return{
                 form: {},
-                test: null,
+                params: null,
+                species: '',
+                organ: '',
                 options: [
                     {value:'Amphimedon queenslandica',label:'Amphimedon queenslandica',},
                     {value:'Astyanax mexicanus',label:'Astyanax mexicanus',},
                     {value:'Branchiostoma floridae',label:'Branchiostoma floridae',},
                     {value:'Ciona intestinalis',label:'Ciona intestinalis',},
-                    {value:'Ciona robusta（intestinalis Type A）',label:'Ciona robusta（intestinalis Type A）',},
+                    {value:'Ciona robusta(intestinalis Type A)',label:'Ciona robusta(intestinalis Type A)',},
                     {value:'Ciona savignyi',label:'Ciona savignyi',},
                     {value:'Clytia medusa',label:'Clytia medusa',},
                     {value:'Cynoglossus semilaevis',label:'Cynoglossus semilaevis',},
@@ -70,41 +76,147 @@
                     {value:'Trichoplax adhaerens',label:'Trichoplax adhaerens',},
                     {value:'Xenia sp.',label:'Xenia sp.',},
                     {value:'Xenopus laevis',label:'Xenopus laevis',},
-                    {value:'Xenopus tropicalis',label:'Xenopus tropicalis',}
+                    {value:'Xenopus tropicalis',label:'Xenopus tropicalis',},
                     ],
-                selected: "",
-                // prettier-ignore
-                cellTypes: ['Parapharyngeal', 'Cathepsin+cells', 'Epidermal', 'Muscle', 'Intestine', 'Pharynx', 'Neural', 'Neoblast', 'Protonephridia']
-                ,
-                // prettier-ignore
-                geneNames: 'dd_Smed_v4_1_0_1\ndd_Smed_v4_899_0_1\ndd_Smed_v4_90_0_1\ndd_Smed_v4_920_0_1\ndd_Smed_v4_924_0_1\ndd_Smed_v4_940_0_1',
-                name: {},
-                expression: {},
-                gene_option: {}
+
+                organTypes: [],
+                geneNames: 'PARP12\nsyn3',
+                expression: [],
+                gene_option: {},
+                cellTypes: [],
+                genes: [],
+                res: {},
             }
         },
         methods: {
-            onSubmit() {
-                console.log(this.geneNames)
-                console.log(this.geneNames=="")
-                console.log(this.geneNames.split("\n"))
-                if(this.geneNames==""){
-                    console.log("不执行")
-                }else{
-                    console.log("执行")
-                    this.generateExpression();
-                }
+            onSubmit(){
+                var self = this;
+                console.log(self.species);
+                console.log(self.geneNames);
+                let params = new URLSearchParams({
+                    species: self.species,
+                    gene: self.geneNames,
+                });
+                console.log(params);
+                self.loading_cell_data(expression_data_url, params);
             },
-            // 绘制热图
-            drowHeatmap(){
-                var data = []
-                for (var i=0;i<this.name.length;i++){
-                    var gene = this.expression[this.name[i]]
-                    for (var j=0; j<gene.length; j++){
-                        data.push([j, i, gene[j]])
+
+            // load data
+            loading_cell_data(url, params){
+                var self = this; 
+                self.$axios.post(url, params)
+                    .then(res=>{
+                        self.res = res.data['ret'];
+                        self.create_organ_type(self.res);
+                        self.drawHeatmap();
+                        console.log(self.organ);
+                        });
+            },
+
+            create_organ_type(data){
+                var self = this;
+                let types = [];
+                self.organTypes = [];
+                for (var i = 0; i < data.length; i++){
+                    var innerArray = data[i];
+                    if (innerArray.length >= 3) {
+                        types.push(innerArray[2]);
                     }
                 }
-                console.log(this.name)
+
+                types = Array.from(new Set(types));
+
+                for (var i = 0; i < types.length; i++){
+                    self.organTypes.push({value: types[i]})
+                }
+            },
+
+            select_organ(data){
+                var self = this;
+                const expression = [];
+                for (var i = 0; i < data.length; i++){
+                    var row = data[i];
+                    if (row[2]===self.organ){
+                        expression.push(row);
+                    };
+                };
+                console.log(expression);
+                return expression;
+            },
+
+            create_cell_type(data){
+
+                var self = this;
+
+                let types = [];
+
+                self.cellTypes = [];
+                
+                for (var i = 0; i < data.length; i++){
+                    var innerArray = data[i];
+                    if (innerArray.length >= 3) {
+                        types.push(innerArray[3]);
+                    }
+                };
+
+                types = Array.from(new Set(types));
+
+                for (var i = 0; i < types.length; i++){
+                    self.cellTypes.push(types[i])
+                };
+            },
+
+            create_gene_type(data){
+
+                var self = this;
+
+                let types = [];
+
+                self.genes=[];
+
+                for (var i = 0; i < data.length; i++){
+                    var innerArray = data[i];
+                    if (innerArray.length >= 3) {
+                        types.push(innerArray[0]);
+                    }
+                };
+
+                types=Array.from(new Set(types));
+
+                for (var i = 0; i < types.length; i++){
+                    self.genes.push(types[i])
+                };
+            },
+
+            // plot heatmap
+            drawHeatmap(){
+                var self = this;
+
+                const matrix = [];
+
+                matrix.length = 0;
+
+                const select_organ_data = self.select_organ(self.res);
+
+                self.create_cell_type(select_organ_data);
+
+                self.create_gene_type(select_organ_data);
+
+                for (var i = 0; i < self.cellTypes.length; i++){
+                    for (var j = 0; j < self.genes.length; j++){
+                        for (var k = 0; k < select_organ_data.length; k++){
+                            var row = select_organ_data[k];
+                            if (self.cellTypes[i] === row[3] && self.genes[j] === row[0]){
+                                matrix.push([i, j, parseFloat(row[1])*100]);
+                            };
+                        };
+                    };
+                };
+
+                self.expression = matrix;
+
+                console.log(self.expression);
+
                 var option = {
                     tooltip: {
                         position: 'top'
@@ -117,7 +229,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: this.cellTypes,
+                        data: self.cellTypes,
                         splitArea: {
                             show: true
                         },
@@ -128,27 +240,25 @@
                     },
                     yAxis: {
                         type: 'category',
-                        data: this.name,
+                        data: self.genes,
                         splitArea: {
                             show: true
                         }
                     },
                     visualMap: {
-                        min: 0.01,
-                        max: 2,
                         calculable: true,
                         orient: 'horizontal',
                         left: 'center',
                         bottom: '0%',
                         inRange: {
-                                color: ['#87CEEb','#021C57']
+                                color: ['#87CEEb','#FFFFFF', '#021C57']
                                 }
                     },
                     series: [
                         {
                             name: 'Punch Card',
                             type: 'heatmap',
-                            data: data,
+                            data: self.expression,
                             label: {
                                 show: false,
                             },
@@ -161,30 +271,11 @@
                         }
                     ]
                 };
-                this.gene_option = option;
+                self.gene_option = option;
             },
-            //
-            //创建表达量数组
-            generateExpression(){
-                var self = this;
-                var path = EXPRESSION_DATA_URL;
-                this.name=this.geneNames.split("\n")
-                for (var i=0; i<this.name.length; i++){
-                    var urlExpression = path + this.name[i] + ".json"
-                    $.getJSON(urlExpression, function(_data){
-                        self.expression[_data.name] = _data.data
-                        var ready = true;
-                        for (var j=0; j<self.name.length;j++){
-                            if (self.expression[self.name[j]] == undefined) {
-                                ready = false;
-                            }
-                        }
-                        if (ready) {self.drowHeatmap()}
-                    })
-                };
-            },
+            
             placeholder_option(msg){
-                return  {
+                return {
                     backgroundColor:'#FFFFFF',
                     title : {
                         text : msg,
@@ -195,21 +286,29 @@
                         },
                     }
                 };
-            }
+            },
         },
-        created(){
-        },
+        
         mounted(){
-            console.log(this.geneNames)
-            console.log(this.geneNames=="")
-            if(this.geneNames==""){
-                console.log("不执行1")
-            }else{
-                console.log("执行1")
-                this.generateExpression();
-            }
+            if(this.species === '' ){
+                this.species = 'Danio rerio';
+            };
+
+            if(this.organ === '' ){
+                this.organ = 'Neuron';
+            };
+
+            if(this.species && this.geneNames) {
+                this.params = new URLSearchParams({
+                    species: this.species,
+                    gene: this.geneNames,
+                });
+            };
+
+            this.loading_cell_data(expression_data_url, this.params);
+
         }
-    }
+}
 
 </script>
 

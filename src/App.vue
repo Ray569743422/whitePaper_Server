@@ -26,7 +26,7 @@
 //
 import Home from "./Home.vue";
 import Tab from './Tab.vue'
-import ComingSoon from './ComingSoon.vue'
+import searchGene from './searchGene.vue'
 import TestAPI from './TestAPI.vue'
 export default {
   data() {
@@ -38,7 +38,7 @@ export default {
   components:{
      Home,
      Tab,
-     ComingSoon,
+     searchGene,
      TestAPI,
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
         }
         else if ( key == "2")
         {
-            this.selected = "ComingSoon";
+            this.selected = "searchGene";
         }
         else if ( key == "3")
         {
