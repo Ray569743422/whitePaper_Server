@@ -142,9 +142,6 @@
          this.clean_gene_buffer()
          this.curr_selected_gene = item;
          this.loading_gene_data()
-         var msg = {};
-         msg.gene = item;
-         this.$emit('updataGlobal',msg)
        },
        updateCurrSample(item){
          this.curr_selected_sample = item;
@@ -318,11 +315,12 @@
              this.updateCurrSample(this.G_sample);
          else
              this.updateCurrSample('Schmidtea mediterranea');
-
          this.gene_option = this.get_gene_option();
          this.cell_option  = this.get_cell_option();
          if( this.curr_selected_sample != null )
              this.loading_cell_data()
+         if(this.G_gene != '' )
+             this.selectGene(this.G_gene);
      },
   };
 </script>

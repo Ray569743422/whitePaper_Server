@@ -10,7 +10,7 @@
           </el-menu>
     </div>
       <div>
-          <component  :G_sample='G_samplename'  @updataGlobal="updateGValues($event)" v-bind:is="selected"></component>
+          <component  :G_gene='G_genename' :G_sample='G_samplename'  @updataGlobal="updateGValues" v-bind:is="selected"></component>
       </div>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
             activeIndex:'0',
             selected:'Species',
             G_samplename:'',
+            G_genename:'',
         }
     },
     components: {
@@ -36,12 +37,13 @@ export default {
       DataBrowser,
     },
     methods: {
-        updateGValues(prop) {
+        updateGValues({species,gene}) {
             console.log('++++++++');
-            console.log(prop);
+            console.log(species);
+            console.log(gene);
             console.log('========');
-            this.G_samplename = prop;
-            console.log(this.G_samplename);
+            this.G_samplename = species;
+            this.G_genename = gene;
             this.$nextTick(() => {
                 this.handleSelect("3",["3"]);
             });

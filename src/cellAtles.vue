@@ -86,11 +86,11 @@ export default {
     },
     methods: {
         jumpUmapsc(){
-            this.$emit('updataGlobal', "Schmidtea mediterranea");
-            },
+            this.$emit('updataGlobal', {species: "Schmidtea mediterranea",gene:''});
+        },
         jumpUmapda(){
-            this.$emit('updataGlobal', "Daino rerio");
-            }
+            this.$emit('updataGlobal', {species: "Danio rerio", gene:''});
+        }
     }
 }
 </script>

@@ -26,7 +26,7 @@
 //
 import Home from "./Home.vue";
 import Tab from './Tab.vue'
-import searchGene from './searchGene.vue'
+//import searchGene from './searchGene.vue'
 import TestAPI from './TestAPI.vue'
 export default {
   data() {
@@ -38,7 +38,7 @@ export default {
   components:{
      Home,
      Tab,
-     searchGene,
+     //searchGene,
      TestAPI,
   },
   methods: {

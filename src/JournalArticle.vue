@@ -138,18 +138,21 @@
             handleSizeChange (size) {
                 this.pageSize = size;
             },
+
             handleCurrentChange (currentpage){
                 this.currentPage = currentpage;
             },
+
             handleRow(row,event,column){
                 this.currentSpecies = row.Species;
                 console.log(this.currentSpecies);
                 console.log(event);
             },
+
             updateOrganAndJump(row){
                 this.currentSpecies = row.Species;
-                this.$emit('updataGlobal',row.Species);
-            }
+                this.$emit('updataGlobal',{species:row.Species,gene:''});
+            },
         },
         beforeMount(){
             var self = this;

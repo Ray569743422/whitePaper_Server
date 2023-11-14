@@ -35,17 +35,17 @@ export default {
         }
     },
     methods: {
-                 selectSample(item){
-                     self.curr_selected_sample = item;
-                     this.$emit('updataGlobal',self.curr_selected_sample)
-                 },
-                 jumpDataBroSc(){
-                   this.$emit('updataGlobal', "Schmidtea mediterranea");
-                    
-                 },
-                 jumpDataBroDa(){
-                    this.$emit('updataGlobal', "Danio rerio");
-                    }
+        selectSample(item){
+            self.curr_selected_sample = item;
+            this.$emit('updataGlobal',{species: self.curr_selected_sample, gene:''});
+        },
+        jumpDataBroSc(){
+          this.$emit('updataGlobal', {species: "Schmidtea mediterranea",gene:''});
+           
+        },
+        jumpDataBroDa(){
+            this.$emit('updataGlobal', {species: "Danio rerio", gene:''});
+        },
     }
 }
 </script>
