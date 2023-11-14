@@ -58,8 +58,7 @@
     import $ from 'jquery';
 
     var species = require('./conf/species.js');
-
-    var GENE_DATA_URL = "http://www.bgiocean.com:8020/code/index.php/WhitePaper/getGeneData";
+    var GENE_DATA_URL = "https://www.bgiocean.com/white_paper/api/getGeneData";
 
     export default {
         props:['G_sample', 'G_gene'],

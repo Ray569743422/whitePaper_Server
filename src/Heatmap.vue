@@ -38,13 +38,14 @@
     import * as echarts from 'echarts';
     import VChart from "vue-echarts";
     var species=require('./conf/species.js');
-    var expression_data_url = 'http://www.bgiocean.com:8020/code/index.php/WhitePaper/heatmap';
+    var expression_data_url = 'https://www.bgiocean.com/white_paper/api/heatmap';
 
     export default{
         name : "heatmap",
         components: {
             VChart
         },
+        props:['G_sample','G_gene'],
         data() {
             return{
                 form: {},
@@ -290,9 +291,11 @@
         },
         
         mounted(){
-            if(this.species === '' ){
+            if(this.G_sample === '' ){
                 this.species = 'Danio rerio';
-            };
+            } else {
+                this.species = this.G_sample;
+            }
 
             if(this.organ === '' ){
                 this.organ = 'Neuron';

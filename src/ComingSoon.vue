@@ -35,7 +35,7 @@ export default {
             table: this.table,
             name: this.name
           });
-          this.$axios.post('http://www.bgiocean.com:8020/code/index.php/WhitePaper/searchJohn', params)
+          this.$axios.post('https://www.bgiocean.com/white_paper/api/searchJohn', params)
             .then(res=>{
                     console.log(res.data);
                     console.log(typeof(res.data));

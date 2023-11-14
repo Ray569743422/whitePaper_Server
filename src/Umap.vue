@@ -41,8 +41,8 @@
   import $ from 'jquery';
   import * as echarts from 'echarts';
   import VChart from "vue-echarts";
-  var CT_URL='http://www.bgiocean.com:8020/code/index.php/WhitePaper/celltypeUmap'
-  var GENE_URL='http://www.bgiocean.com:8020/code/index.php/WhitePaper/expressionUmap'
+  var CT_URL=  'https://www.bgiocean.com/white_paper/api/celltypeUmap'
+  var GENE_URL='https://www.bgiocean.com/white_paper/api/expressionUmap'
   var species = require('./conf/species.js');
   export default {
     name : "Umap2D",

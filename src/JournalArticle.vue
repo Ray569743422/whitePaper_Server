@@ -52,7 +52,7 @@
     import $ from 'jquery';
 
     // datasets
-    var GENE_DATA_URL = "http://49.235.68.146/gene_data/pulication.json"
+    var GENE_DATA_URL = "https://www.bgiocean.com/white_paper/publication/publication.json"
 
     //
     var species = require('./conf/species.js');
