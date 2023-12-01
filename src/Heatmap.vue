@@ -81,7 +81,7 @@
                     ],
 
                 organTypes: [],
-                geneNames: 'PARP12\nsyn3',
+                geneNames: '',
                 expression: [],
                 gene_option: {},
                 cellTypes: [],
@@ -291,15 +291,21 @@
         },
         
         mounted(){
-            if(this.G_sample === '' ){
-                this.species = 'Danio rerio';
+            if(this.G_sample === ''){
+                this.species = 'Schmidtea mediterranea';
             } else {
                 this.species = this.G_sample;
             }
 
             if(this.organ === '' ){
-                this.organ = 'Neuron';
+                this.organ = 'Head';
             };
+
+            if(this.geneNames === ''){
+                this.geneNames = 'dd-Smed-v4-10001-0-1'
+            } else {
+                this.geneNames = this.G_gene;
+            }
 
             if(this.species && this.geneNames) {
                 this.params = new URLSearchParams({

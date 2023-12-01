@@ -4,9 +4,10 @@
     </header>
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin: 0px;background:rgba(0,0,0,0);position:relative;top:85px;font-size:30px;" text-color="#000000">
             <el-menu-item index=0 >Summary</el-menu-item>
-            <el-menu-item index=1 >Past Publications</el-menu-item>
-            <el-menu-item index=2 >Cell Atlas</el-menu-item>
-            <el-menu-item index=3 >Data Browser</el-menu-item>
+            <el-menu-item index=1 >Search Gene</el-menu-item>
+            <el-menu-item index=2 >Past Publications</el-menu-item>
+            <el-menu-item index=3 >Cell Atlas</el-menu-item>
+            <el-menu-item index=4  >Data Browser</el-menu-item>
           </el-menu>
     </div>
       <div>
@@ -20,6 +21,7 @@
     import JournalArticle from './JournalArticle.vue'
     import cellAtles from './cellAtles.vue'
     import DataBrowser from './DataBrowser.vue'
+    import searchGene from './searchGene.vue'
 
 export default {
     data(){
@@ -32,6 +34,7 @@ export default {
     },
     components: {
       Species,
+      searchGene,
       JournalArticle,
       cellAtles,
       DataBrowser,
@@ -45,7 +48,7 @@ export default {
             this.G_samplename = species;
             this.G_genename = gene;
             this.$nextTick(() => {
-                this.handleSelect("3",["3"]);
+                this.handleSelect("4",["4"]);
             });
         },
         handleSelect(key, keyPath){
@@ -53,14 +56,18 @@ export default {
             if(key=='0'){
                 this.selected = "Species";
             }
-            else if(key=='1')
+            else if ( key == "1")
+            {
+                this.selected = "searchGene";
+            }
+            else if(key=='2')
             {
                 this.selected = "JournalArticle";
             }
-            else if(key=='2'){
+            else if(key=='3'){
                 this.selected = "cellAtles"
             }
-            else if(key=='3'){
+            else if(key=='4'){
                 this.selected = "DataBrowser"
             }
         }

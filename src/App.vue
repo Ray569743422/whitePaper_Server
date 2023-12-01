@@ -4,7 +4,6 @@
     <img src="./assets/BGI.png" style="width:100%;height:140px">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" active-text-color="#409eff" style="margin-top: -10px;background-color:#033096;font-size:30px;" text-color="#ffffff">
         <el-menu-item index="1">Home</el-menu-item>
-        <el-menu-item index="2">Search Gene</el-menu-item>
         <el-menu-item index="3">Browse Experiments</el-menu-item>
         <el-menu-item index="4">About Us</el-menu-item>
         <el-menu-item index="5">Test API</el-menu-item>
@@ -26,8 +25,8 @@
 //
 import Home from "./Home.vue";
 import Tab from './Tab.vue'
-//import searchGene from './searchGene.vue'
 import TestAPI from './TestAPI.vue'
+
 export default {
   data() {
     return {
@@ -38,7 +37,6 @@ export default {
   components:{
      Home,
      Tab,
-     //searchGene,
      TestAPI,
   },
   methods: {
